@@ -21,6 +21,6 @@
 </p>
 <p>
 - 🤝🏻 Licencia.<br>
-  Todo el desarrollo es realizado por
+  Todo el desarrollo es realizado por ????
 </p>
 </p>
