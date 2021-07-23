@@ -63,7 +63,7 @@ public class Main {
                     case "5":
                         System.out.println("\n\n\n\n");
                         System.out.println("   ****************************   Manejo de archivos   ****************************   \n");
-
+                        Practica_04_AddressBook.MuestraMenuAgenda();
                         System.out.println("   ***********************************   F I N   **********************************   ");
                         System.out.print("Presione ENTER para continuar.");
                         System.out.println("\n\n");
