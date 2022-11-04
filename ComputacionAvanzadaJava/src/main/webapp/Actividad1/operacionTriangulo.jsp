@@ -24,7 +24,7 @@
 	                    
 	                    ManejoTriangulo mTriangulo = new ManejoTriangulo(sAltura, sBase);
 	                    mTriangulo.calculaArea();
-	                    mTriangulo.calculaPromedio();
+	                    mTriangulo.calculaPerimetro();
 	                %>
 	            </div>
 	        </div>

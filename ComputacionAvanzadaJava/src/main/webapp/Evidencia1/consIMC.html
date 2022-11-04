@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<title>Evidencia 1: Manejo datos del IMC</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="../styles/bootstrap.min.css" rel="stylesheet" media="screen">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+</head>
+<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<h1>Evidencia 1:</h1>
+					<h2>Pantalla de IMC</h2>
+				</div>
+			</div>
+			<div class="row">
+        		<div class="col-md-12 text-center">
+        			<p>Manejo de IMC.</p>
+        		</div>
+			</div>
+			<div class="row">
+        		<div class="col-md-12 text-center">
+        			<a href="consUsuario.html" class="btn btn-danger">Regregasar datos usuario</a>
+        		</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<div class="container">
+						<div class="row justify-content-center">
+								<fieldset class="col-12 col-md-12 px-3">
+									<legend>Alta de índice de Masa Muscular</legend>
+									<div class="row justify-content-center">
+										<div class="form-group col-sm-3 col-lg-2">
+      										<label class="pt-2" for="NombreAlta"><b>Edad</b> (Años):</label>
+											<div class="input-group">
+												<input type="text" name="NombreAlta" id="txtNombre" class="form-control">
+											</div>
+      									</div>
+      									<div class="form-group col-sm-4 col-lg-4">
+      										<label class="pt-2" for="UsuAlta"><b>Fecha de medida:</b></label>
+											<div class="input-group">
+												<input type="text" name="UsuAlta" id="txtUsuario" class="form-control" /> DD/MM/AAAA
+											</div>
+      									</div>
+      									<div class="form-group col-sm-5 col-lg-6">
+      										<label class="pt-2" for="tUnidad"><b>Tipo de unidad:</b></label>
+											<div class="input-group">
+													<input type="radio" name="tUnidad" value="Metrico" checked="checked" /><b>Metrico</b> (Kilos/Metros))
+													<input type="radio" name="tUnidad" value="Ingles" /><b>Ingles</b> (Libras / Pulgadas)
+											</div>
+										</div>
+									</div>
+									<div class="row justify-content-center">
+										<div class="form-group col-sm-4 col-lg-2">
+      										<label class="pt-2" for="imcPeso"><b>Peso:</b></label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<input type="text" name="imcPeso" id="txtPeso" class="form-control" />
+												</div>
+											</div>
+      									</div>
+      									<div class="form-group col-sm-4 col-lg-2">
+      										<label class="pt-2" for="imcEstatura"><b>Estatura:</b></label>
+											<div class="input-group">
+												<input type="text" name="imcEstatura" id="txtEstatura" class="form-control" />
+											</div>
+      									</div>
+									</div>
+									<div class="row justify-content-center">
+										<div class="form-group col-sm-4 col-lg-12">
+											<input type="button" name="btnAlta" value="Alta" class="btn btn-success" />
+										</div>
+      								</div>
+								</fieldset>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+        		<div class="col-md-1 text-center"></div>
+				<div class="col-md-10 text-center">
+					<table class="table">
+	  					<thead class="thead-dark">
+					    	<tr>
+								<th scope="col">Edad</th>
+								<th scope="col">Fecha de medida</th>
+								<th scope="col">Tipo de unidad</th>
+								<th scope="col">Peso</th>
+								<th scope="col">Estatura</th>
+								<th scope="col">IMC</th>
+								<th scope="col">Nivel Peso</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>39</td>
+								<td>29/10/2022</td>
+								<td>Metrico</td>
+								<td>115</td>
+								<td>1.79</td>
+								<td>35.9</td>
+								<td>Obesidad</td>
+							</tr>
+							<tr>
+								<td>39</td>
+								<td>28/10/2022</td>
+								<td>Metrico</td>
+								<td>120</td>
+								<td>1.79</td>
+								<td>37.5</td>
+								<td>Obesidad</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

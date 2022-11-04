@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<title>Evidencia 1: Consulta de usuarios</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link href="../styles/bootstrap.min.css" rel="stylesheet" media="screen">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/popper.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+</head>
+<body>
+	<form>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<h1>Evidencia 1:</h1>
+					<h2>Pantalla Usuarios</h2>
+				</div>
+			</div>
+			<div class="row">
+        		<div class="col-md-12 text-center">
+        			<p>Listado de usuarios.</p>
+        		</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3 text-center">
+        			
+        		</div>
+        		<div class="col-md-6 text-center">
+        			<a href="consBusquedaUsuario.html" class="btn btn-danger">Regregasar busqueda usuarios</a>
+        		</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<div class="container">
+						<div class="row justify-content-center">
+								<fieldset class="col-12 col-md-12 px-3">
+									<legend>Alta nuevo usuario</legend>
+									<div class="row justify-content-center">
+										<div class="form-group col-sm-4 col-lg-6">
+      										<label class="pt-2" for="NombreAlta"><b>Nombre completo:</b></label>
+											<div class="input-group">
+												<input type="text" name="NombreAlta" id="txtNombre" class="form-control">
+											</div>
+      									</div>
+      									<div class="form-group col-sm-4 col-lg-3">
+      										<label class="pt-2" for="UsuAlta"><b>Usuario:</b></label>
+											<div class="input-group">
+												<input type="text" name="UsuAlta" id="txtUsuario" class="form-control" />
+											</div>
+      									</div>
+      									<div class="form-group col-sm-4 col-lg-3">
+      										<label class="pt-2" for="Sexo"><b>Sexo:</b></label>
+											<div class="input-group">
+												<div class="input-group-prepend">
+													<input type="radio" name="Sexo" value="Masculino" checked="checked" />Masculino
+													<input type="radio" name="Sexo" value="Femenino" />Femenino
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row justify-content-center">
+										<div class="form-group col-sm-4 col-lg-12">
+											<input type="button" name="btnAlta" value="Alta" class="btn btn-success" />
+										</div>
+      								</div>
+								</fieldset>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-1 text-center"></div>
+				<div class="col-md-10 text-center">
+					<table class="table">
+	  					<thead class="thead-dark">
+					    	<tr>
+								<th scope="col">Usuario</th>
+								<th scope="col">Nombre Completo</th>
+								<th scope="col">Sexo</th>
+								<th scope="col">Edad</th>
+								<th scope="col">IMC</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>aramirez</th>
+								<td>ANGEL RAMIREZ MANCERA</td>
+								<td>MASCULINO</td>
+								<td>39</td>
+								<td><a href="consIMC.html">35.2</a></td>
+							</tr>
+							<tr>
+								<th>vmonrreal</th>
+								<td>VALERIA MONRREAL BOTELLO</td>
+								<td>FEMENINO</td>
+								<td>23</td>
+								<td><a href="consIMC.html">25.3</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</form>
+</body>
+</html>

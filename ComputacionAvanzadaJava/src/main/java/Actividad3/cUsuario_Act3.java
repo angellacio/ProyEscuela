@@ -1,4 +1,4 @@
-package Actividad2;
+package Actividad3;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,36 +7,39 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "/cOperaTriangulo", urlPatterns = {"/cOperaTriangulo"})
-public class cOperaTriangulo extends HttpServlet {
+@WebServlet(name = "/Actividad3/cUsuario_Act3", urlPatterns = {"/Actividad3/cUsuario_Act3"})
+public class cUsuario_Act3 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    protected void procesaRequerimiento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	response.setContentType("text/html;charset=UTF-98");
-    	String sBase = request.getParameter("txtBase");
-    	String sAltura = request.getParameter("txtAltura");
-    	Actividad1.ManejoTriangulo mTriangulo = new Actividad1.ManejoTriangulo(sAltura, sBase);
-    	
-    	mTriangulo.calculaArea();
-    	mTriangulo.calculaPerimetro();
-    	
-    	request.setAttribute("mTrianguloResultado", mTriangulo);
-    	request.getRequestDispatcher("Actividad3/oTrianguloResult.jsp").forward(request, response);
+
+    public cUsuario_Act3() {
+
     }
 
-    @Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	}
-
-    @Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	procesaRequerimiento(request, response);
-	}
+    protected void procesaRequerimiento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	response.setContentType("text/html;charset=UTF-98");
+    	String sNombre = request.getParameter("txtNombre").trim().toUpperCase();
+    	
+    	HttpSession sesion = request.getSession(false);
+    	sesion.setAttribute("Usuario", sNombre);
+    	
+    	request.setAttribute("sUsuarioResultado", sNombre);
+    	request.getRequestDispatcher("a3_DTriangulo.jsp").forward(request, response);
+    }
     
     @Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		procesaRequerimiento(request, response);
+	}
+
+	@Override
     public String getServletInfo() {
-    	return "Calcula Area y Perimetro de un triangulo.";
+    	return "Obten datos de usuario para la Actividad 3.";
     }
 }

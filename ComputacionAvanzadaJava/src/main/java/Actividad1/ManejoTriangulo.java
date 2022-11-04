@@ -54,7 +54,7 @@ public class ManejoTriangulo {
     public void calculaArea(){
         Area = (getBase() * getAltura()) / 2;
     }
-    public void calculaPromedio(){
+    public void calculaPerimetro(){
         Perimetro = getBase() * 3;
     }
     
