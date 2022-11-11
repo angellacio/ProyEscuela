@@ -124,7 +124,7 @@ namespace Electronica_AccesoBD
                 }
 
                 sQuery = sQuery.Substring(0, sQuery.Length - 5);
-                sQuery = string.Format("{0} ORDER BY Estatus, Apellido1, Apellido2, Nombre", sQuery);
+                sQuery = string.Format("{0} ORDER BY Estatus DESC, Apellido1, Apellido2, Nombre", sQuery);
 
                 sqlCom.CommandText = sQuery;
                 sqlCom.CommandType = CommandType.Text;

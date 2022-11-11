@@ -116,7 +116,7 @@ namespace Aplicacion_Electronica.Formas
                 switch (accionPant)
                 {
                     case Electronica_Entidades.enumTextos.AccionPantalla.Bajas:
-                        mSeg.ActualizaUsuario(itemAlterar.nId, itemAlterar.sApellido1, itemAlterar.sApellido2, itemAlterar.sNombre, itemAlterar.sUsuario, itemAlterar.sContrasenia, false);
+                        mSeg.ActualizaUsuario(itemAlterar.nId, itemAlterar.sApellido1, itemAlterar.sApellido2, itemAlterar.sNombre, itemAlterar.sUsuario, itemAlterar.sContrasenia, ckbSeg_Estado.Checked);
                         break;
                     case Electronica_Entidades.enumTextos.AccionPantalla.Cambios:
                         mSeg.ActualizaUsuario(itemAlterar.nId, txtSeg_Apellido1.Text.Trim(), txtSeg_Apellido2.Text.Trim(), txtSeg_Nombre.Text.Trim(), txtSeg_Usuario.Text.Trim(), txtSeg_Contrasenia.Text.Trim(), ckbSeg_Estado.Checked);

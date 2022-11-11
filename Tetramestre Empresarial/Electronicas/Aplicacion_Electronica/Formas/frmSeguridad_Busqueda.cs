@@ -85,13 +85,13 @@ namespace Aplicacion_Electronica.Formas
                 dgvSeg_Encontrados.AutoGenerateColumns = false;
                 dgvSeg_Encontrados.DataSource = lstClientes;
             }
-            catch (ApplicationException)
+            catch (ApplicationException ex)
             {
-
+                MessageBox.Show(ex.Message, "Validacion de campos.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message, "Error aplicativo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {

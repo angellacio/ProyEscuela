@@ -54,22 +54,54 @@ namespace Aplicacion_Electronica.Formas
             get { return txtCliBus_CURP.Text.Trim(); }
             set { txtCliBus_CURP.Text = value.Trim(); }
         }
-        public Boolean bolEstado
+        public Nullable<Boolean> bolEstado
         {
-            get { return ckbCliBus_Activo.Checked; }
-            set { ckbCliBus_Activo.Checked = value; }
+            get
+            {
+                Nullable<Boolean> bResult = null;
+
+                if (rdbActivo.Checked) bResult = true;
+                else if (rdbInactivo.Checked) bResult = false;
+
+                return bResult;
+            }
+            set
+            {
+                rdbTodos.Checked = false;
+                rdbInactivo.Checked = false;
+                rdbActivo.Checked = false;
+
+                if (value == null) rdbTodos.Checked = true;
+                else if (value.Value == true) rdbActivo.Checked = true;
+                else if (value.Value == false) rdbInactivo.Checked = true;
+            }
         }
 
         public void RealizarBusquedaClientes()
         {
-            List<Electronica_Entidades.entClientes> lstClientes = new List<Electronica_Entidades.entClientes>()
+            Electronica_AccesoBD.manejoClientes datCliente = null;
+            List<Electronica_Entidades.entClientes> lstClientes = null;
+            try
             {
-                new Electronica_Entidades.entClientes() { nId = 1, sApellido1 = "RAMIREZ", sApellido2 = "MANCERA", sNombre = "ANGEL", sCURP="RAMA821207HDFMNN01", sRFC="RAMA821207DS9", sTelefono="5536413068", sCorreo="angel.ramirez.mancera@gmail.com", sDireccion="Mi casa", bEstdo = true },
-                new Electronica_Entidades.entClientes() { nId = 2, sApellido1 = "MONRREAL", sApellido2 = "BOTELLO", sNombre = "OLADERMIS ISABEL", sCURP="MOBO830704MTAMNN03", sRFC="MOBO730804FJA", sTelefono="553985564", sCorreo="oladermis@gmail.com", sDireccion="", bEstdo = true }
-            };
+                datCliente = new Electronica_AccesoBD.manejoClientes();
 
-            dgvCli_Encontrados.AutoGenerateColumns = false;
-            dgvCli_Encontrados.DataSource = lstClientes;
+                lstClientes = datCliente.ConsultaClientes(nIDCliente, sApellido1, sApellido2, sNombre, sRFC, sCURP, bolEstado);
+
+                dgvCli_Encontrados.AutoGenerateColumns = false;
+                dgvCli_Encontrados.DataSource = lstClientes;
+            }
+            catch (ApplicationException ex)
+            {
+                MessageBox.Show(ex.Message, "Validacion de campos.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error aplicativo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                datCliente.Finaliza();
+            }
         }
 
         private void frmCliente_Busqueda_Load(object sender, EventArgs e)
@@ -84,9 +116,12 @@ namespace Aplicacion_Electronica.Formas
 
         private void dgvCli_Encontrados_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            itemModificar = new Electronica_Entidades.entClientes() { nId = 1, sApellido1 = "RAMIREZ", sApellido2 = "MANCERA", sNombre = "ANGEL", sCURP = "RAMA821207HDFMNN01", sRFC = "RAMA821207DS9", sTelefono = "5536413068", sCorreo = "angel.ramirez.mancera@gmail.com", sDireccion = "Mi casa", bEstdo = true };
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            if (e.ColumnIndex > -1 && e.RowIndex > -1)
+            {
+                itemModificar = ((Electronica_Entidades.entClientes)dgvCli_Encontrados.Rows[e.RowIndex].DataBoundItem);
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
     }
 }

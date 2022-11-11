@@ -135,6 +135,7 @@
             this.txtCli_Telefono.Name = "txtCli_Telefono";
             this.txtCli_Telefono.Size = new System.Drawing.Size(101, 20);
             this.txtCli_Telefono.TabIndex = 30;
+            this.txtCli_Telefono.TextChanged += new System.EventHandler(this.txtCli_Telefono_TextChanged);
             // 
             // lblCli_Correo
             // 
@@ -277,6 +278,7 @@
             this.txtCli_RFC.Name = "txtCli_RFC";
             this.txtCli_RFC.Size = new System.Drawing.Size(98, 20);
             this.txtCli_RFC.TabIndex = 34;
+            this.txtCli_RFC.TextChanged += new System.EventHandler(this.txtCli_RFC_TextChanged);
             // 
             // txtCli_Nombre
             // 
@@ -284,6 +286,7 @@
             this.txtCli_Nombre.Name = "txtCli_Nombre";
             this.txtCli_Nombre.Size = new System.Drawing.Size(225, 20);
             this.txtCli_Nombre.TabIndex = 31;
+            this.txtCli_Nombre.TextChanged += new System.EventHandler(this.txtCli_Nombre_TextChanged);
             // 
             // lblCli_CURP
             // 
@@ -325,6 +328,7 @@
             this.txtCli_Apellido2.Name = "txtCli_Apellido2";
             this.txtCli_Apellido2.Size = new System.Drawing.Size(225, 20);
             this.txtCli_Apellido2.TabIndex = 30;
+            this.txtCli_Apellido2.TextChanged += new System.EventHandler(this.txtCli_Apellido2_TextChanged);
             // 
             // lblCli_apellido2
             // 
@@ -341,6 +345,7 @@
             this.txtCli_Apellido1.Name = "txtCli_Apellido1";
             this.txtCli_Apellido1.Size = new System.Drawing.Size(225, 20);
             this.txtCli_Apellido1.TabIndex = 29;
+            this.txtCli_Apellido1.TextChanged += new System.EventHandler(this.txtCli_Apellido1_TextChanged);
             // 
             // epClientes
             // 
@@ -350,20 +355,19 @@
             // 
             this.btnCli_Limpiar.BackgroundImage = global::Aplicacion_Electronica.Properties.Resources.Limpiar;
             this.btnCli_Limpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnCli_Limpiar.Location = new System.Drawing.Point(432, 9);
+            this.btnCli_Limpiar.Location = new System.Drawing.Point(454, 12);
             this.btnCli_Limpiar.Name = "btnCli_Limpiar";
-            this.btnCli_Limpiar.Size = new System.Drawing.Size(27, 23);
+            this.btnCli_Limpiar.Size = new System.Drawing.Size(36, 23);
             this.btnCli_Limpiar.TabIndex = 36;
             this.btnCli_Limpiar.UseVisualStyleBackColor = true;
             this.btnCli_Limpiar.Click += new System.EventHandler(this.btnCli_Limpiar_Click);
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(384, 38);
+            this.btnGuardar.Location = new System.Drawing.Point(414, 12);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(75, 23);
+            this.btnGuardar.Size = new System.Drawing.Size(36, 23);
             this.btnGuardar.TabIndex = 37;
-            this.btnGuardar.Text = "Guardar...";
             this.btnGuardar.UseVisualStyleBackColor = true;
             this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 

@@ -46,7 +46,9 @@
             this.txtCliBus_IdCliente = new System.Windows.Forms.TextBox();
             this.gbCliBus_CURP = new System.Windows.Forms.GroupBox();
             this.txtCliBus_CURP = new System.Windows.Forms.TextBox();
-            this.ckbCliBus_Activo = new System.Windows.Forms.CheckBox();
+            this.rdbActivo = new System.Windows.Forms.RadioButton();
+            this.rdbInactivo = new System.Windows.Forms.RadioButton();
+            this.rdbTodos = new System.Windows.Forms.RadioButton();
             this.gbCliBus_RFC.SuspendLayout();
             this.gbCliBus_Nombre.SuspendLayout();
             this.gbCliBus_Apellido2.SuspendLayout();
@@ -60,7 +62,7 @@
             // 
             this.btnCli_Buscar.BackgroundImage = global::Aplicacion_Electronica.Properties.Resources.Buscar;
             this.btnCli_Buscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnCli_Buscar.Location = new System.Drawing.Point(505, 29);
+            this.btnCli_Buscar.Location = new System.Drawing.Point(524, 29);
             this.btnCli_Buscar.Name = "btnCli_Buscar";
             this.btnCli_Buscar.Size = new System.Drawing.Size(26, 23);
             this.btnCli_Buscar.TabIndex = 60;
@@ -246,24 +248,46 @@
             this.txtCliBus_CURP.Size = new System.Drawing.Size(139, 20);
             this.txtCliBus_CURP.TabIndex = 20;
             // 
-            // ckbCliBus_Activo
+            // rdbActivo
             // 
-            this.ckbCliBus_Activo.AutoSize = true;
-            this.ckbCliBus_Activo.Checked = true;
-            this.ckbCliBus_Activo.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckbCliBus_Activo.Location = new System.Drawing.Point(364, 31);
-            this.ckbCliBus_Activo.Name = "ckbCliBus_Activo";
-            this.ckbCliBus_Activo.Size = new System.Drawing.Size(56, 17);
-            this.ckbCliBus_Activo.TabIndex = 59;
-            this.ckbCliBus_Activo.Text = "Activo";
-            this.ckbCliBus_Activo.UseVisualStyleBackColor = true;
+            this.rdbActivo.AutoSize = true;
+            this.rdbActivo.Location = new System.Drawing.Point(358, 18);
+            this.rdbActivo.Name = "rdbActivo";
+            this.rdbActivo.Size = new System.Drawing.Size(60, 17);
+            this.rdbActivo.TabIndex = 61;
+            this.rdbActivo.Text = "Activos";
+            this.rdbActivo.UseVisualStyleBackColor = true;
+            // 
+            // rdbInactivo
+            // 
+            this.rdbInactivo.AutoSize = true;
+            this.rdbInactivo.Location = new System.Drawing.Point(358, 41);
+            this.rdbInactivo.Name = "rdbInactivo";
+            this.rdbInactivo.Size = new System.Drawing.Size(68, 17);
+            this.rdbInactivo.TabIndex = 62;
+            this.rdbInactivo.Text = "Inactivos";
+            this.rdbInactivo.UseVisualStyleBackColor = true;
+            // 
+            // rdbTodos
+            // 
+            this.rdbTodos.AutoSize = true;
+            this.rdbTodos.Checked = true;
+            this.rdbTodos.Location = new System.Drawing.Point(424, 31);
+            this.rdbTodos.Name = "rdbTodos";
+            this.rdbTodos.Size = new System.Drawing.Size(55, 17);
+            this.rdbTodos.TabIndex = 63;
+            this.rdbTodos.TabStop = true;
+            this.rdbTodos.Text = "Todos";
+            this.rdbTodos.UseVisualStyleBackColor = true;
             // 
             // frmCliente_Busqueda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(568, 225);
-            this.Controls.Add(this.ckbCliBus_Activo);
+            this.Controls.Add(this.rdbTodos);
+            this.Controls.Add(this.rdbInactivo);
+            this.Controls.Add(this.rdbActivo);
             this.Controls.Add(this.gbCliBus_CURP);
             this.Controls.Add(this.gbCliBus_IDCliente);
             this.Controls.Add(this.btnCli_Buscar);
@@ -313,6 +337,8 @@
         private System.Windows.Forms.TextBox txtCliBus_IdCliente;
         private System.Windows.Forms.GroupBox gbCliBus_CURP;
         private System.Windows.Forms.TextBox txtCliBus_CURP;
-        private System.Windows.Forms.CheckBox ckbCliBus_Activo;
+        private System.Windows.Forms.RadioButton rdbActivo;
+        private System.Windows.Forms.RadioButton rdbInactivo;
+        private System.Windows.Forms.RadioButton rdbTodos;
     }
 }

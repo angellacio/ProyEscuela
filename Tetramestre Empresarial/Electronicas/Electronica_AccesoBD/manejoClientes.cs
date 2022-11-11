@@ -24,14 +24,14 @@ namespace Electronica_AccesoBD
             }
         }
 
-        public List<ent.entSeguridad> ConsultaClientes(int? nIdCliente, string sApellido1, string sApellido2, string sNombre, string sRFC, string sCURP, Boolean? bolEstado)
+        public List<ent.entClientes> ConsultaClientes(int? nIdCliente, string sApellido1, string sApellido2, string sNombre, string sRFC, string sCURP, Boolean? bolEstado)
         {
-            List<ent.entSeguridad> result = null;
+            List<ent.entClientes> result = null;
             SqlDataReader sqlDR = null;
             string sQuery = "SELECT IdCliente, Apellido1, Apellido2, Nombre, FechaAlta, CURP, RFC, Telefono, Correo, Direccion, FechaBaja, Estatus FROM elecCliente WHERE";
             try
             {
-                result = new List<ent.entSeguridad>();
+                result = new List<ent.entClientes>();
 
                 if (sqlCon.State == ConnectionState.Closed) sqlCon.Open();
                 sqlCom = sqlCon.CreateCommand();
@@ -73,7 +73,7 @@ namespace Electronica_AccesoBD
                 }
 
                 sQuery = sQuery.Substring(0, sQuery.Length - 5);
-                sQuery = string.Format("{0} ORDER BY Estatus, Apellido1, Apellido2, Nombre", sQuery);
+                sQuery = string.Format("{0} ORDER BY Estatus DESC, Apellido1, Apellido2, Nombre", sQuery);
 
                 sqlCom.CommandText = sQuery;
                 sqlCom.CommandType = CommandType.Text;
@@ -82,19 +82,22 @@ namespace Electronica_AccesoBD
 
                 while (sqlDR.Read())
                 {
-                    ent.entSeguridad entSeg = new ent.entSeguridad();
+                    ent.entClientes entCli = new ent.entClientes();
 
-                    if (sqlDR["IdUsuairo"] != DBNull.Value) entSeg.nId = sqlDR.GetInt32(sqlDR.GetOrdinal("IdUsuairo"));
-                    if (sqlDR["Apellido1"] != DBNull.Value) entSeg.sApellido1 = sqlDR.GetString(sqlDR.GetOrdinal("Apellido1"));
-                    if (sqlDR["Apellido2"] != DBNull.Value) entSeg.sApellido2 = sqlDR.GetString(sqlDR.GetOrdinal("Apellido2"));
-                    if (sqlDR["Nombre"] != DBNull.Value) entSeg.sNombre = sqlDR.GetString(sqlDR.GetOrdinal("Nombre"));
-                    if (sqlDR["Usuario"] != DBNull.Value) entSeg.sUsuario = sqlDR.GetString(sqlDR.GetOrdinal("Usuario"));
-                    if (sqlDR["Contrasenia"] != DBNull.Value) entSeg.sContrasenia = sqlDR.GetString(sqlDR.GetOrdinal("Contrasenia"));
-                    if (sqlDR["FechaAlta"] != DBNull.Value) entSeg.fAlta = sqlDR.GetDateTime(sqlDR.GetOrdinal("FechaAlta"));
-                    if (sqlDR["FechaBaja"] != DBNull.Value) entSeg.fBaja = sqlDR.GetDateTime(sqlDR.GetOrdinal("FechaBaja"));
-                    if (sqlDR["Estatus"] != DBNull.Value) entSeg.bEstado = sqlDR.GetBoolean(sqlDR.GetOrdinal("Estatus"));
+                    if (sqlDR["IdCliente"] != DBNull.Value) entCli.nId = sqlDR.GetInt32(sqlDR.GetOrdinal("IdCliente"));
+                    if (sqlDR["Apellido1"] != DBNull.Value) entCli.sApellido1 = sqlDR.GetString(sqlDR.GetOrdinal("Apellido1"));
+                    if (sqlDR["Apellido2"] != DBNull.Value) entCli.sApellido2 = sqlDR.GetString(sqlDR.GetOrdinal("Apellido2"));
+                    if (sqlDR["Nombre"] != DBNull.Value) entCli.sNombre = sqlDR.GetString(sqlDR.GetOrdinal("Nombre"));
+                    if (sqlDR["FechaAlta"] != DBNull.Value) entCli.fAlta = sqlDR.GetDateTime(sqlDR.GetOrdinal("FechaAlta"));
+                    if (sqlDR["CURP"] != DBNull.Value) entCli.sCURP = sqlDR.GetString(sqlDR.GetOrdinal("CURP"));
+                    if (sqlDR["RFC"] != DBNull.Value) entCli.sRFC = sqlDR.GetString(sqlDR.GetOrdinal("RFC"));
+                    if (sqlDR["Telefono"] != DBNull.Value) entCli.sTelefono = sqlDR.GetString(sqlDR.GetOrdinal("Telefono"));
+                    if (sqlDR["Correo"] != DBNull.Value) entCli.sCorreo = sqlDR.GetString(sqlDR.GetOrdinal("Correo"));
+                    if (sqlDR["Direccion"] != DBNull.Value) entCli.sDireccion = sqlDR.GetString(sqlDR.GetOrdinal("Direccion"));
+                    if (sqlDR["FechaBaja"] != DBNull.Value) entCli.fBaja = sqlDR.GetDateTime(sqlDR.GetOrdinal("FechaBaja"));
+                    if (sqlDR["Estatus"] != DBNull.Value) entCli.bEstdo = sqlDR.GetBoolean(sqlDR.GetOrdinal("Estatus"));
 
-                    result.Add(entSeg);
+                    result.Add(entCli);
                 }
             }
             catch (ApplicationException)
@@ -117,9 +120,9 @@ namespace Electronica_AccesoBD
             return result;
         }
 
-        public void AltaCliente(string sApellido1, string sApellido2, string sNombre, string sUsuario, string sContraseña, Boolean bolEstado)
+        public void AltaCliente(string sApellido1, string sApellido2, string sNombre, string sCurp, string sRFC, string sTelefono, string sCorreo, string sDireccion, Boolean bolEstado)
         {
-            string sQuery = "INSERT INTO elecUsuario(Apellido1, Apellido2, Nombre, FechaAlta, Usuario, Contrasenia, Estatus) VALUES(@sApellido1, @sApellido2, @sNombre, GetDate(), @sUsuario, @sContrasenia, @bEstado)";
+            string sQuery = "INSERT INTO elecCliente(Apellido1, Apellido2, Nombre, FechaAlta, CURP, RFC, Telefono, Correo, Direccion, Estatus) VALUES(@Apellido1, @Apellido2, @Nombre, GetDate(), @CURP, @RFC, @Telefono, @Correo, @Direccion, @Estatus)";
             try
             {
                 if (sqlCon.State == ConnectionState.Closed) sqlCon.Open();
@@ -127,12 +130,15 @@ namespace Electronica_AccesoBD
 
                 sqlCom.CommandText = sQuery;
 
-                sqlCom.Parameters.Add(new SqlParameter("@sApellido1", SqlDbType.NVarChar, 150)).Value = sApellido1;
-                sqlCom.Parameters.Add(new SqlParameter("@sApellido2", SqlDbType.NVarChar, 150)).Value = sApellido2;
-                sqlCom.Parameters.Add(new SqlParameter("@sNombre", SqlDbType.NVarChar, 250)).Value = sNombre;
-                sqlCom.Parameters.Add(new SqlParameter("@sUsuario", SqlDbType.NVarChar, 8)).Value = sUsuario;
-                sqlCom.Parameters.Add(new SqlParameter("@sContrasenia", SqlDbType.NVarChar, 16)).Value = sContraseña;
-                sqlCom.Parameters.Add(new SqlParameter("@bEstado", SqlDbType.Bit)).Value = bolEstado;
+                sqlCom.Parameters.Add(new SqlParameter("@Apellido1", SqlDbType.NVarChar, 150)).Value = sApellido1;
+                sqlCom.Parameters.Add(new SqlParameter("@Apellido2", SqlDbType.NVarChar, 150)).Value = sApellido2;
+                sqlCom.Parameters.Add(new SqlParameter("@Nombre", SqlDbType.NVarChar, 250)).Value = sNombre;
+                sqlCom.Parameters.Add(new SqlParameter("@CURP", SqlDbType.NVarChar, 8)).Value = sCurp;
+                sqlCom.Parameters.Add(new SqlParameter("@RFC", SqlDbType.NVarChar, 16)).Value = sRFC;
+                sqlCom.Parameters.Add(new SqlParameter("@Telefono", SqlDbType.NVarChar, 16)).Value = sTelefono;
+                sqlCom.Parameters.Add(new SqlParameter("@Correo", SqlDbType.NVarChar, 16)).Value = sCorreo;
+                sqlCom.Parameters.Add(new SqlParameter("@Direccion", SqlDbType.NVarChar, 16)).Value = sDireccion;
+                sqlCom.Parameters.Add(new SqlParameter("@Estatus", SqlDbType.Bit)).Value = bolEstado;
 
                 sqlCom.CommandType = CommandType.Text;
 
@@ -151,9 +157,9 @@ namespace Electronica_AccesoBD
                 Finaliza();
             }
         }
-        public void ActualizaCliente(int nIDUsuario, string sApellido1, string sApellido2, string sNombre, string sUsuario, string sContraseña, Boolean bolEstado)
+        public void ActualizaCliente(int nIDCliente, string sApellido1, string sApellido2, string sNombre, string sCurp, string sRFC, string sTelefono, string sCorreo, string sDireccion, Boolean bolEstado)
         {
-            string sQuery = "UPDATE elecUsuario SET Apellido1=@sApellido1, Apellido2=@sApellido2, Nombre=@sNombre, Usuario=@sUsuario, Contrasenia=@sContrasenia, FechaBaja=CASE @bEstado WHEN 1 THEN null ELSE GetDate() END, Estatus=@bEstado WHERE IdUsuairo=@nIdUsuario";
+            string sQuery = "UPDATE elecCliente SET Apellido1=@Apellido1, Apellido2=@Apellido2, Nombre=@Nombre, CURP=@CURP, RFC=@RFC, Telefono=@Telefono, Correo=@Correo, Direccion=@Direccion, FechaBaja=CASE @Estado WHEN 1 THEN null ELSE GetDate() END, Estatus = @Estado WHERE IdCliente = @IdCliente";
             try
             {
                 if (sqlCon.State == ConnectionState.Closed) sqlCon.Open();
@@ -161,23 +167,26 @@ namespace Electronica_AccesoBD
 
                 sqlCom.CommandText = sQuery;
 
-                sqlCom.Parameters.Add(new SqlParameter("@nIdUsuario", SqlDbType.Int)).Value = nIDUsuario;
-                sqlCom.Parameters.Add(new SqlParameter("@sApellido1", SqlDbType.NVarChar, 150)).Value = sApellido1;
-                sqlCom.Parameters.Add(new SqlParameter("@sApellido2", SqlDbType.NVarChar, 150)).Value = sApellido2;
-                sqlCom.Parameters.Add(new SqlParameter("@sNombre", SqlDbType.NVarChar, 250)).Value = sNombre;
-                sqlCom.Parameters.Add(new SqlParameter("@sUsuario", SqlDbType.NVarChar, 8)).Value = sUsuario;
-                sqlCom.Parameters.Add(new SqlParameter("@sContrasenia", SqlDbType.NVarChar, 16)).Value = sContraseña;
-                sqlCom.Parameters.Add(new SqlParameter("@bEstado", SqlDbType.Bit)).Value = bolEstado;
+                sqlCom.Parameters.Add(new SqlParameter("@IdCliente", SqlDbType.Int)).Value = nIDCliente;
+                sqlCom.Parameters.Add(new SqlParameter("@Apellido1", SqlDbType.NVarChar, 150)).Value = sApellido1;
+                sqlCom.Parameters.Add(new SqlParameter("@Apellido2", SqlDbType.NVarChar, 150)).Value = sApellido2;
+                sqlCom.Parameters.Add(new SqlParameter("@Nombre", SqlDbType.NVarChar, 250)).Value = sNombre;
+                sqlCom.Parameters.Add(new SqlParameter("@CURP", SqlDbType.NVarChar, 8)).Value = sCurp;
+                sqlCom.Parameters.Add(new SqlParameter("@RFC", SqlDbType.NVarChar, 16)).Value = sRFC;
+                sqlCom.Parameters.Add(new SqlParameter("@Telefono", SqlDbType.NVarChar, 16)).Value = sTelefono;
+                sqlCom.Parameters.Add(new SqlParameter("@Correo", SqlDbType.NVarChar, 16)).Value = sCorreo;
+                sqlCom.Parameters.Add(new SqlParameter("@Direccion", SqlDbType.NVarChar, 16)).Value = sDireccion;
+                sqlCom.Parameters.Add(new SqlParameter("@Estado", SqlDbType.Bit)).Value = bolEstado;
 
                 sqlCom.CommandType = CommandType.Text;
 
                 sqlCom.ExecuteNonQuery();
             }
-            catch (ApplicationException)
+            catch (ApplicationException ex)
             {
                 //ManejoLogErrores.txt_mensajeError(ex.ToString());
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 //ManejoLogErrores.txt_mensajeError(ex.ToString());
             }

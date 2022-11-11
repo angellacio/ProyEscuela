@@ -10,6 +10,22 @@ namespace Aplicacion_Electronica.Formas
             InitializeComponent();
             this.Text = sTituloPantalla;
             accionPant = accionpant;
+            btnGuardar.Text = "";
+            if (accionpant == Electronica_Entidades.enumTextos.AccionPantalla.Alta)
+            {
+                this.btnGuardar.BackgroundImage = global::Aplicacion_Electronica.Properties.Resources.Agregar;
+                this.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            }
+            else if (accionpant == Electronica_Entidades.enumTextos.AccionPantalla.Cambios)
+            {
+                this.btnGuardar.BackgroundImage = global::Aplicacion_Electronica.Properties.Resources.Actualizar;
+                this.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            }
+            else if (accionpant == Electronica_Entidades.enumTextos.AccionPantalla.Bajas)
+            {
+                this.btnGuardar.BackgroundImage = global::Aplicacion_Electronica.Properties.Resources.Borrar;
+                this.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            }
         }
 
         public Electronica_Entidades.enumTextos.AccionPantalla accionPant { get; set; }
@@ -78,16 +94,13 @@ namespace Aplicacion_Electronica.Formas
             {
                 case Electronica_Entidades.enumTextos.AccionPantalla.Bajas:
                     LlenaDatos();
-                    btnGuardar.Text = "Baja";
                     break;
                 case Electronica_Entidades.enumTextos.AccionPantalla.Cambios:
                     LlenaDatos();
                     EstadoComponentes(false);
-                    btnGuardar.Text = "Modificar";
                     break;
                 case Electronica_Entidades.enumTextos.AccionPantalla.Alta:
                     EstadoComponentes(false);
-                    btnGuardar.Text = "Alta";
                     break;
             }
             validaCampos();
@@ -109,17 +122,42 @@ namespace Aplicacion_Electronica.Formas
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            switch (accionPant)
+            Electronica_AccesoBD.manejoClientes mCli = null;
+            try
             {
-                case Electronica_Entidades.enumTextos.AccionPantalla.Bajas:
+                mCli = new Electronica_AccesoBD.manejoClientes();
 
-                    break;
-                case Electronica_Entidades.enumTextos.AccionPantalla.Cambios:
+                if (epClientes.GetError(txtCli_Apellido1).Trim() != "" || epClientes.GetError(txtCli_Apellido2).Trim() != "" ||
+                  epClientes.GetError(txtCli_Nombre).Trim() != "" || epClientes.GetError(txtCli_RFC).Trim() != "" ||
+                  epClientes.GetError(txtCli_Telefono).Trim() != "")
+                    throw new ApplicationException("Favor de validar los campos con una alerta de color rojo");
 
-                    break;
-                case Electronica_Entidades.enumTextos.AccionPantalla.Alta:
-
-                    break;
+                switch (accionPant)
+                {
+                    case Electronica_Entidades.enumTextos.AccionPantalla.Bajas:
+                        mCli.ActualizaCliente(itemAlterar.nId, itemAlterar.sApellido1, itemAlterar.sApellido2, itemAlterar.sNombre, itemAlterar.sCURP, itemAlterar.sRFC, itemAlterar.sTelefono, itemAlterar.sCorreo, itemAlterar.sDireccion, ckbCli_Estado.Checked);
+                        break;
+                    case Electronica_Entidades.enumTextos.AccionPantalla.Cambios:
+                        mCli.ActualizaCliente(itemAlterar.nId, txtCli_Apellido1.Text.Trim(), txtCli_Apellido2.Text.Trim(), txtCli_Nombre.Text.Trim(), txtCli_CURP.Text.Trim().ToUpper(), txtCli_RFC.Text.Trim().ToUpper(), txtCli_Telefono.Text.Trim(), txtCli_Correo.Text.Trim(), txtCli_Direccion.Text.Trim(), ckbCli_Estado.Checked);
+                        break;
+                    case Electronica_Entidades.enumTextos.AccionPantalla.Alta:
+                        mCli.AltaCliente(txtCli_Apellido1.Text.Trim(), txtCli_Apellido2.Text.Trim(), txtCli_Nombre.Text.Trim(), txtCli_CURP.Text.Trim().ToUpper(), txtCli_RFC.Text.Trim().ToUpper(), txtCli_Telefono.Text.Trim(), txtCli_Correo.Text.Trim(), txtCli_Direccion.Text.Trim(), true);
+                        break;
+                }
+                MessageBox.Show("La operación fue realizada satisfactoriamente.", "Operacion...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
+            catch (ApplicationException ex)
+            {
+                MessageBox.Show(ex.Message, "Validacion de campos.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error aplicativo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                mCli.Finaliza();
             }
         }
 
@@ -141,6 +179,27 @@ namespace Aplicacion_Electronica.Formas
                 itemAlterar.lstAutorizados.Add(frmSerchCliente.itemModificar);
                 LlenaAutorizados();
             }
+        }
+
+        private void txtCli_Apellido1_TextChanged(object sender, EventArgs e)
+        {
+            validaCampos();
+        }
+        private void txtCli_Apellido2_TextChanged(object sender, EventArgs e)
+        {
+            validaCampos();
+        }
+        private void txtCli_Nombre_TextChanged(object sender, EventArgs e)
+        {
+            validaCampos();
+        }
+        private void txtCli_RFC_TextChanged(object sender, EventArgs e)
+        {
+            validaCampos();
+        }
+        private void txtCli_Telefono_TextChanged(object sender, EventArgs e)
+        {
+            validaCampos();
         }
     }
 }
