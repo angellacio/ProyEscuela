@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using ent = Electronica_Entidades;
 using RN = Electronica_ReglasNegocio;
 
-namespace Aplicacion_Electronica.Formas
+namespace AppElectronica.Formas
 {
     public partial class frmEquipoElectronico : Form
     {
@@ -18,17 +18,17 @@ namespace Aplicacion_Electronica.Formas
             btnGuardar.Text = "";
             if (accionpant == Electronica_Entidades.enumTextos.AccionPantalla.Alta)
             {
-                this.btnGuardar.BackgroundImage = global::Aplicacion_Electronica.Properties.Resources.Agregar;
+                this.btnGuardar.BackgroundImage = global::AppElectronica.Properties.Resources.Agregar;
                 this.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             }
             else if (accionpant == Electronica_Entidades.enumTextos.AccionPantalla.Cambios)
             {
-                this.btnGuardar.BackgroundImage = global::Aplicacion_Electronica.Properties.Resources.Actualizar;
+                this.btnGuardar.BackgroundImage = global::AppElectronica.Properties.Resources.Actualizar;
                 this.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             }
             else if (accionpant == Electronica_Entidades.enumTextos.AccionPantalla.Bajas)
             {
-                this.btnGuardar.BackgroundImage = global::Aplicacion_Electronica.Properties.Resources.Borrar;
+                this.btnGuardar.BackgroundImage = global::AppElectronica.Properties.Resources.Borrar;
                 this.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             }
         }

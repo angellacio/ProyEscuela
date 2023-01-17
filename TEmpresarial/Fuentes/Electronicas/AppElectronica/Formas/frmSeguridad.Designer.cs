@@ -1,4 +1,4 @@
-﻿namespace Aplicacion_Electronica.Formas
+﻿namespace AppElectronica.Formas
 {
     partial class frmSeguridad
     {
@@ -165,7 +165,7 @@
             // 
             // btnSeg_Limpiar
             // 
-            this.btnSeg_Limpiar.BackgroundImage = global::Aplicacion_Electronica.Properties.Resources.Limpiar;
+            this.btnSeg_Limpiar.BackgroundImage = global::AppElectronica.Properties.Resources.Limpiar;
             this.btnSeg_Limpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnSeg_Limpiar.Location = new System.Drawing.Point(414, 5);
             this.btnSeg_Limpiar.Name = "btnSeg_Limpiar";

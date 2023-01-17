@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using ent = Electronica_Entidades;
 using RN = Electronica_ReglasNegocio;
 
-namespace Aplicacion_Electronica.Formas
+namespace AppElectronica.Formas
 {
     public partial class frmCatalogos : Form
     {
@@ -63,7 +63,7 @@ namespace Aplicacion_Electronica.Formas
             ckbEstado.Checked = true;
             itemModificar = null;
 
-            this.btnGuardar.BackgroundImage = global::Aplicacion_Electronica.Properties.Resources.Agregar;
+            this.btnGuardar.BackgroundImage = global::AppElectronica.Properties.Resources.Agregar;
             this.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
         }
 
@@ -159,7 +159,7 @@ namespace Aplicacion_Electronica.Formas
         {
             if (e.ColumnIndex > -1 && e.RowIndex > -1)
             {
-                this.btnGuardar.BackgroundImage = global::Aplicacion_Electronica.Properties.Resources.Actualizar;
+                this.btnGuardar.BackgroundImage = global::AppElectronica.Properties.Resources.Actualizar;
                 this.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
 
                 itemModificar = ((ent.entCatalogoSencillo)dtgCatalogo.Rows[e.RowIndex].DataBoundItem);

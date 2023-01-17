@@ -1,4 +1,4 @@
-﻿namespace Aplicacion_Electronica.Formas
+﻿namespace AppElectronica.Formas
 {
     partial class frmCliente_Busqueda
     {
@@ -60,7 +60,7 @@
             // 
             // btnCli_Buscar
             // 
-            this.btnCli_Buscar.BackgroundImage = global::Aplicacion_Electronica.Properties.Resources.Buscar;
+            this.btnCli_Buscar.BackgroundImage = global::AppElectronica.Properties.Resources.Buscar;
             this.btnCli_Buscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnCli_Buscar.Location = new System.Drawing.Point(524, 29);
             this.btnCli_Buscar.Name = "btnCli_Buscar";

@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Aplicacion_Electronica.Formas
+namespace AppElectronica.Formas
 {
     public partial class frmReporte_ClienteEquipo : Form
     {

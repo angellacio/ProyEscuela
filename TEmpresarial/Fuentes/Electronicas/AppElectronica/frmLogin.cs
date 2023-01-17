@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using mRN = Electronica_ReglasNegocio;
 
-namespace Aplicacion_Electronica
+namespace AppElectronica
 {
     public partial class frmLogin : Form
     {

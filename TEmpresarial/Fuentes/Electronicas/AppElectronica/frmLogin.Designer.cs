@@ -1,4 +1,4 @@
-﻿namespace Aplicacion_Electronica
+﻿namespace AppElectronica
 {
     partial class frmLogin
     {

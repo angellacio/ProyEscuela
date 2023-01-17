@@ -1,4 +1,4 @@
-﻿namespace Aplicacion_Electronica
+﻿namespace AppElectronica
 {
     partial class mdiInicio
     {
@@ -106,7 +106,7 @@
             // 
             // mCli_Altas
             // 
-            this.mCli_Altas.Image = global::Aplicacion_Electronica.Properties.Resources.Agregar;
+            this.mCli_Altas.Image = global::AppElectronica.Properties.Resources.Agregar;
             this.mCli_Altas.Name = "mCli_Altas";
             this.mCli_Altas.Size = new System.Drawing.Size(121, 22);
             this.mCli_Altas.Text = "Altas";
@@ -121,7 +121,7 @@
             // 
             // mCli_Bajas
             // 
-            this.mCli_Bajas.Image = global::Aplicacion_Electronica.Properties.Resources.Borrar;
+            this.mCli_Bajas.Image = global::AppElectronica.Properties.Resources.Borrar;
             this.mCli_Bajas.Name = "mCli_Bajas";
             this.mCli_Bajas.Size = new System.Drawing.Size(121, 22);
             this.mCli_Bajas.Text = "Bajas";
@@ -138,7 +138,7 @@
             // 
             // mEqui_Entradas
             // 
-            this.mEqui_Entradas.Image = global::Aplicacion_Electronica.Properties.Resources.Agregar;
+            this.mEqui_Entradas.Image = global::AppElectronica.Properties.Resources.Agregar;
             this.mEqui_Entradas.Name = "mEqui_Entradas";
             this.mEqui_Entradas.Size = new System.Drawing.Size(114, 22);
             this.mEqui_Entradas.Text = "Entrada";
@@ -146,7 +146,7 @@
             // 
             // mEqui_Salidas
             // 
-            this.mEqui_Salidas.Image = global::Aplicacion_Electronica.Properties.Resources.Borrar;
+            this.mEqui_Salidas.Image = global::AppElectronica.Properties.Resources.Borrar;
             this.mEqui_Salidas.Name = "mEqui_Salidas";
             this.mEqui_Salidas.Size = new System.Drawing.Size(114, 22);
             this.mEqui_Salidas.Text = "Salida";
@@ -179,7 +179,7 @@
             // 
             // mSeg_Altas
             // 
-            this.mSeg_Altas.Image = global::Aplicacion_Electronica.Properties.Resources.Agregar;
+            this.mSeg_Altas.Image = global::AppElectronica.Properties.Resources.Agregar;
             this.mSeg_Altas.Name = "mSeg_Altas";
             this.mSeg_Altas.Size = new System.Drawing.Size(121, 22);
             this.mSeg_Altas.Text = "Altas";
@@ -194,7 +194,7 @@
             // 
             // mSeg_Bajas
             // 
-            this.mSeg_Bajas.Image = global::Aplicacion_Electronica.Properties.Resources.Borrar;
+            this.mSeg_Bajas.Image = global::AppElectronica.Properties.Resources.Borrar;
             this.mSeg_Bajas.Name = "mSeg_Bajas";
             this.mSeg_Bajas.Size = new System.Drawing.Size(121, 22);
             this.mSeg_Bajas.Text = "Bajas";

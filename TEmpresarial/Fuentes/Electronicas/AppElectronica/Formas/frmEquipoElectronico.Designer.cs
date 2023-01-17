@@ -1,4 +1,4 @@
-﻿namespace Aplicacion_Electronica.Formas
+﻿namespace AppElectronica.Formas
 {
     partial class frmEquipoElectronico
     {
@@ -245,7 +245,7 @@
             // btnMonto
             // 
             this.btnMonto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMonto.BackgroundImage = global::Aplicacion_Electronica.Properties.Resources.Agregar;
+            this.btnMonto.BackgroundImage = global::AppElectronica.Properties.Resources.Agregar;
             this.btnMonto.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnMonto.Location = new System.Drawing.Point(443, 17);
             this.btnMonto.Name = "btnMonto";
@@ -420,7 +420,7 @@
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.BackgroundImage = global::Aplicacion_Electronica.Properties.Resources.Limpiar;
+            this.btnLimpiar.BackgroundImage = global::AppElectronica.Properties.Resources.Limpiar;
             this.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnLimpiar.Location = new System.Drawing.Point(463, 141);
             this.btnLimpiar.Name = "btnLimpiar";
@@ -431,7 +431,7 @@
             // 
             // btnNuevoTipoEquipo
             // 
-            this.btnNuevoTipoEquipo.BackgroundImage = global::Aplicacion_Electronica.Properties.Resources.Agregar;
+            this.btnNuevoTipoEquipo.BackgroundImage = global::AppElectronica.Properties.Resources.Agregar;
             this.btnNuevoTipoEquipo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnNuevoTipoEquipo.Location = new System.Drawing.Point(358, 70);
             this.btnNuevoTipoEquipo.Name = "btnNuevoTipoEquipo";
@@ -443,7 +443,7 @@
             // 
             // btnBuscarCliente
             // 
-            this.btnBuscarCliente.BackgroundImage = global::Aplicacion_Electronica.Properties.Resources.Buscar;
+            this.btnBuscarCliente.BackgroundImage = global::AppElectronica.Properties.Resources.Buscar;
             this.btnBuscarCliente.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnBuscarCliente.Location = new System.Drawing.Point(191, 13);
             this.btnBuscarCliente.Name = "btnBuscarCliente";
@@ -496,7 +496,7 @@
             // 
             this.clRegEqui_ButtonBorrar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.clRegEqui_ButtonBorrar.HeaderText = "Borrar";
-            this.clRegEqui_ButtonBorrar.Image = global::Aplicacion_Electronica.Properties.Resources.Borrar;
+            this.clRegEqui_ButtonBorrar.Image = global::AppElectronica.Properties.Resources.Borrar;
             this.clRegEqui_ButtonBorrar.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
             this.clRegEqui_ButtonBorrar.Name = "clRegEqui_ButtonBorrar";
             this.clRegEqui_ButtonBorrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;

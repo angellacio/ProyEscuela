@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ent = Electronica_Entidades;
-using mBD = Electronica_AccesoBD;
+using mBD = Elec_AccesoBD;
 using mEx = Electronica_Comunes.ManejoErrores;
 
 namespace Electronica_ReglasNegocio

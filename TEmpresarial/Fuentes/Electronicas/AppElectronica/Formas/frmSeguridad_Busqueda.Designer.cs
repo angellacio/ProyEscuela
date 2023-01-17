@@ -1,4 +1,4 @@
-﻿namespace Aplicacion_Electronica.Formas
+﻿namespace AppElectronica.Formas
 {
     partial class frmSeguridad_Busqueda
     {
@@ -211,7 +211,7 @@
             // 
             // btnSeg_Buscar
             // 
-            this.btnSeg_Buscar.BackgroundImage = global::Aplicacion_Electronica.Properties.Resources.Buscar;
+            this.btnSeg_Buscar.BackgroundImage = global::AppElectronica.Properties.Resources.Buscar;
             this.btnSeg_Buscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnSeg_Buscar.Location = new System.Drawing.Point(520, 30);
             this.btnSeg_Buscar.Name = "btnSeg_Buscar";

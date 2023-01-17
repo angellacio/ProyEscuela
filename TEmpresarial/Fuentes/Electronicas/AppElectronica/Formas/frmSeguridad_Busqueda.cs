@@ -4,7 +4,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using mRN = Electronica_ReglasNegocio;
 
-namespace Aplicacion_Electronica.Formas
+namespace AppElectronica.Formas
 {
     public partial class frmSeguridad_Busqueda : Form
     {

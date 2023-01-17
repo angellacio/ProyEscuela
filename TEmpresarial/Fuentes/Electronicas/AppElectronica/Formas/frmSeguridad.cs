@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using mRN = Electronica_ReglasNegocio;
 
-namespace Aplicacion_Electronica.Formas
+namespace AppElectronica.Formas
 {
     public partial class frmSeguridad : Form
     {
@@ -14,17 +14,17 @@ namespace Aplicacion_Electronica.Formas
             btnSeg_Guardar.Text = "";
             if (accionpant == Electronica_Entidades.enumTextos.AccionPantalla.Alta)
             {
-                this.btnSeg_Guardar.BackgroundImage = global::Aplicacion_Electronica.Properties.Resources.Agregar;
+                this.btnSeg_Guardar.BackgroundImage = global::AppElectronica.Properties.Resources.Agregar;
                 this.btnSeg_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             }
             else if (accionpant == Electronica_Entidades.enumTextos.AccionPantalla.Cambios)
             {
-                this.btnSeg_Guardar.BackgroundImage = global::Aplicacion_Electronica.Properties.Resources.Actualizar;
+                this.btnSeg_Guardar.BackgroundImage = global::AppElectronica.Properties.Resources.Actualizar;
                 this.btnSeg_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             }
             else if (accionpant == Electronica_Entidades.enumTextos.AccionPantalla.Bajas)
             {
-                this.btnSeg_Guardar.BackgroundImage = global::Aplicacion_Electronica.Properties.Resources.Borrar;
+                this.btnSeg_Guardar.BackgroundImage = global::AppElectronica.Properties.Resources.Borrar;
                 this.btnSeg_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             }
         }

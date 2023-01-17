@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using mRN = Electronica_ReglasNegocio;
 using ent = Electronica_Entidades;
 
-namespace Aplicacion_Electronica.Formas
+namespace AppElectronica.Formas
 {
     public partial class frmCliente_Busqueda : Form
     {

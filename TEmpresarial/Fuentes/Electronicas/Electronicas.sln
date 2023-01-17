@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1340
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aplicacion_Electronica", "Aplicacion_Electronica\Aplicacion_Electronica.csproj", "{19D70843-F2A5-41EC-868D-CBD6FF84A166}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppElectronica", "AppElectronica\AppElectronica.csproj", "{19D70843-F2A5-41EC-868D-CBD6FF84A166}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Electronica_Entidades", "Electronica_Entidades\Electronica_Entidades.csproj", "{8FBDEDCB-0451-486D-A30C-1D30989D4EAC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elec_Entidades", "Elec_Entidades\Elec_Entidades.csproj", "{8FBDEDCB-0451-486D-A30C-1D30989D4EAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Electronica_AccesoBD", "Electronica_AccesoBD\Electronica_AccesoBD.csproj", "{61660922-2021-484D-9C8B-F5E1A1DF1407}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elec_AccesoBD", "Elec_AccesoBD\Elec_AccesoBD.csproj", "{61660922-2021-484D-9C8B-F5E1A1DF1407}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Electronica_ReglasNegocio", "Electronica_ReglasNegocio\Electronica_ReglasNegocio.csproj", "{52078C18-5FA9-49A9-A5EA-FCD43FB3AC41}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elec_ReglasNegocio", "Elec_ReglasNegocio\Elec_ReglasNegocio.csproj", "{52078C18-5FA9-49A9-A5EA-FCD43FB3AC41}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Electronica_Comunes", "Electronica_Comunes\Electronica_Comunes.csproj", "{E1903B88-C3DE-4BAE-AF27-D833A09C9783}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elec_Comunes", "Elec_Comunes\Elec_Comunes.csproj", "{E1903B88-C3DE-4BAE-AF27-D833A09C9783}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

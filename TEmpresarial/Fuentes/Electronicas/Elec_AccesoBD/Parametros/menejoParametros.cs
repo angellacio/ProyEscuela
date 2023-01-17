@@ -1,7 +1,7 @@
 ﻿using System;
 using segTextEnum = Electronica_Entidades.EnumTextos.Seguridad.textEnumSeguridad;
 
-namespace Electronica_AccesoBD.Parametros
+namespace Elec_AccesoBD.Parametros
 {
     [Serializable]
     public class menejoParametros

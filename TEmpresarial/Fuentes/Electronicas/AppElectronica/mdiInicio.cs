@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using ent = Electronica_Entidades;
 
-namespace Aplicacion_Electronica
+namespace AppElectronica
 {
     public partial class mdiInicio : Form
     {

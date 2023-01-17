@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Aplicacion_Electronica.Properties
+namespace AppElectronica.Properties
 {
 
 

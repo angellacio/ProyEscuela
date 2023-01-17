@@ -7,7 +7,7 @@ using ent = Electronica_Entidades;
 using mEx = Electronica_Comunes.ManejoErrores;
 
 
-namespace Electronica_AccesoBD
+namespace Elec_AccesoBD
 {
     public class manejoCatalogos
     {

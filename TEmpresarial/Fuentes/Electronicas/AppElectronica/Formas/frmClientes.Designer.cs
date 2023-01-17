@@ -1,4 +1,4 @@
-﻿namespace Aplicacion_Electronica.Formas
+﻿namespace AppElectronica.Formas
 {
     partial class frmClientes
     {
@@ -232,7 +232,7 @@
             // 
             // btnCli_Buscar
             // 
-            this.btnCli_Buscar.BackgroundImage = global::Aplicacion_Electronica.Properties.Resources.Buscar;
+            this.btnCli_Buscar.BackgroundImage = global::AppElectronica.Properties.Resources.Buscar;
             this.btnCli_Buscar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnCli_Buscar.Location = new System.Drawing.Point(409, 16);
             this.btnCli_Buscar.Name = "btnCli_Buscar";
@@ -353,7 +353,7 @@
             // 
             // btnCli_Limpiar
             // 
-            this.btnCli_Limpiar.BackgroundImage = global::Aplicacion_Electronica.Properties.Resources.Limpiar;
+            this.btnCli_Limpiar.BackgroundImage = global::AppElectronica.Properties.Resources.Limpiar;
             this.btnCli_Limpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnCli_Limpiar.Location = new System.Drawing.Point(454, 12);
             this.btnCli_Limpiar.Name = "btnCli_Limpiar";

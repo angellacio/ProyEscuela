@@ -1,4 +1,4 @@
-﻿namespace Aplicacion_Electronica.Formas
+﻿namespace AppElectronica.Formas
 {
     partial class frmCatalogos
     {
@@ -162,7 +162,7 @@
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.BackgroundImage = global::Aplicacion_Electronica.Properties.Resources.Limpiar;
+            this.btnLimpiar.BackgroundImage = global::AppElectronica.Properties.Resources.Limpiar;
             this.btnLimpiar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnLimpiar.Location = new System.Drawing.Point(500, 63);
             this.btnLimpiar.Name = "btnLimpiar";
