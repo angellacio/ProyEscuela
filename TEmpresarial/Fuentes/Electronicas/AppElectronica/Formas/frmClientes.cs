@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Electronica_Entidades;
+using System;
 using System.Windows.Forms;
 using mRN = Electronica_ReglasNegocio;
 
@@ -22,11 +23,11 @@ namespace AppElectronica.Formas
                 this.btnGuardar.BackgroundImage = global::AppElectronica.Properties.Resources.Actualizar;
                 this.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             }
-            else if (accionpant == Electronica_Entidades.enumTextos.AccionPantalla.Bajas)
-            {
-                this.btnGuardar.BackgroundImage = global::AppElectronica.Properties.Resources.Borrar;
-                this.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            }
+            //else if (accionpant == Electronica_Entidades.enumTextos.AccionPantalla.Bajas)
+            //{
+            //    this.btnGuardar.BackgroundImage = global::AppElectronica.Properties.Resources.Borrar;
+            //    this.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            //}
         }
 
         public Electronica_Entidades.enumTextos.AccionPantalla accionPant { get; set; }
@@ -59,23 +60,30 @@ namespace AppElectronica.Formas
             txtCli_Telefono.Text = itemAlterar.sTelefono.Trim();
             txtCli_Correo.Text = itemAlterar.sCorreo.Trim();
             txtCli_Direccion.Text = itemAlterar.sDireccion.Trim();
-            ckbCli_Estado.Checked = itemAlterar.bEstdo;
+            ckbCli_Estado.Checked = itemAlterar.apEstado == Electronica_Entidades.enumTextos.AccionPantalla.Alta;
             LlenaAutorizados();
         }
         private void LlenaAutorizados()
         {
+            dtgCli_AutRec.AutoGenerateColumns = false;
+            dtgCli_AutRec.DataSource = null;
             dtgCli_AutRec.DataSource = itemAlterar.lstAutorizados;
         }
-        private void EstadoComponentes(bool bolEstado)
+        private void EstadoComponentes()//bool bolEstado)
         {
-            txtCli_Apellido1.ReadOnly = bolEstado;
-            txtCli_Apellido2.ReadOnly = bolEstado;
-            txtCli_Nombre.ReadOnly = bolEstado;
-            txtCli_CURP.ReadOnly = bolEstado;
-            txtCli_RFC.ReadOnly = bolEstado;
-            txtCli_Telefono.ReadOnly = bolEstado;
-            txtCli_Correo.ReadOnly = bolEstado;
-            txtCli_Direccion.ReadOnly = bolEstado;
+            txtCli_Apellido1.ReadOnly = itemAlterar.apEstado != enumTextos.AccionPantalla.Alta;// bolEstado;
+            txtCli_Apellido2.ReadOnly = itemAlterar.apEstado != enumTextos.AccionPantalla.Alta;// bolEstado;
+            txtCli_Nombre.ReadOnly = itemAlterar.apEstado != enumTextos.AccionPantalla.Alta;// bolEstado;
+            txtCli_CURP.ReadOnly = itemAlterar.apEstado != enumTextos.AccionPantalla.Alta;// bolEstado;
+            txtCli_RFC.ReadOnly = itemAlterar.apEstado != enumTextos.AccionPantalla.Alta;// bolEstado;
+            txtCli_Telefono.ReadOnly = itemAlterar.apEstado != enumTextos.AccionPantalla.Alta;// bolEstado;
+            txtCli_Correo.ReadOnly = itemAlterar.apEstado != enumTextos.AccionPantalla.Alta;// bolEstado;
+            txtCli_Direccion.ReadOnly = itemAlterar.apEstado != enumTextos.AccionPantalla.Alta;// bolEstado;
+
+            txtCli_AutRecID.ReadOnly = itemAlterar.apEstado != enumTextos.AccionPantalla.Alta;// bolEstado;
+            txtCli_AutRecApellido1.ReadOnly = itemAlterar.apEstado != enumTextos.AccionPantalla.Alta;// bolEstado;
+            txtCli_AutRecApellido2.ReadOnly = itemAlterar.apEstado != enumTextos.AccionPantalla.Alta;// bolEstado;
+            btnCli_Buscar.Enabled = itemAlterar.apEstado != enumTextos.AccionPantalla.Alta;// !bolEstado;
         }
         private void validaCampos()
         {
@@ -90,35 +98,34 @@ namespace AppElectronica.Formas
         private void frmClientes_Load(object sender, EventArgs e)
         {
             Limpiar();
-            EstadoComponentes(true);
-            switch (accionPant)
+            if (accionPant == Electronica_Entidades.enumTextos.AccionPantalla.Cambios)
             {
-                case Electronica_Entidades.enumTextos.AccionPantalla.Bajas:
-                    LlenaDatos();
-                    break;
-                case Electronica_Entidades.enumTextos.AccionPantalla.Cambios:
-                    LlenaDatos();
-                    EstadoComponentes(false);
-                    break;
-                case Electronica_Entidades.enumTextos.AccionPantalla.Alta:
-                    EstadoComponentes(false);
-                    break;
+                LlenaDatos();
             }
+            else
+            {
+                itemAlterar = new Electronica_Entidades.entCliente() { apEstado = enumTextos.AccionPantalla.Alta };
+            }
+            EstadoComponentes();//true);
+            //switch (accionPant)
+            //{
+            //    case Electronica_Entidades.enumTextos.AccionPantalla.Bajas:
+            //        LlenaDatos();
+            //        break;
+            //    case Electronica_Entidades.enumTextos.AccionPantalla.Cambios:
+            //        EstadoComponentes(false);
+            //        break;
+            //    case Electronica_Entidades.enumTextos.AccionPantalla.Alta:
+            //        EstadoComponentes(false);
+            //        break;
+            //}
             validaCampos();
         }
 
         private void btnCli_Limpiar_Click(object sender, EventArgs e)
         {
             Limpiar();
-            switch (accionPant)
-            {
-                case Electronica_Entidades.enumTextos.AccionPantalla.Bajas:
-                    LlenaDatos();
-                    break;
-                case Electronica_Entidades.enumTextos.AccionPantalla.Cambios:
-                    LlenaDatos();
-                    break;
-            }
+            LlenaDatos();
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -132,9 +139,9 @@ namespace AppElectronica.Formas
 
                 switch (accionPant)
                 {
-                    case Electronica_Entidades.enumTextos.AccionPantalla.Bajas:
-                        mRN.mCliente.ActualizaCliente(itemAlterar.nId, itemAlterar.sApellido1, itemAlterar.sApellido2, itemAlterar.sNombre, itemAlterar.sCURP, itemAlterar.sRFC, itemAlterar.sTelefono, itemAlterar.sCorreo, itemAlterar.sDireccion, ckbCli_Estado.Checked);
-                        break;
+                    //case Electronica_Entidades.enumTextos.AccionPantalla.Bajas:
+                    //    mRN.mCliente.ActualizaCliente(itemAlterar.nId, itemAlterar.sApellido1, itemAlterar.sApellido2, itemAlterar.sNombre, itemAlterar.sCURP, itemAlterar.sRFC, itemAlterar.sTelefono, itemAlterar.sCorreo, itemAlterar.sDireccion, ckbCli_Estado.Checked);
+                    //    break;
                     case Electronica_Entidades.enumTextos.AccionPantalla.Cambios:
                         mRN.mCliente.ActualizaCliente(itemAlterar.nId, txtCli_Apellido1.Text.Trim(), txtCli_Apellido2.Text.Trim(), txtCli_Nombre.Text.Trim(), txtCli_CURP.Text.Trim().ToUpper(), txtCli_RFC.Text.Trim().ToUpper(), txtCli_Telefono.Text.Trim(), txtCli_Correo.Text.Trim(), txtCli_Direccion.Text.Trim(), ckbCli_Estado.Checked);
                         break;
@@ -195,6 +202,13 @@ namespace AppElectronica.Formas
         private void txtCli_Telefono_TextChanged(object sender, EventArgs e)
         {
             validaCampos();
+        }
+
+        private void dtgCli_AutRec_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dtgCli_AutRec.Columns[e.ColumnIndex].Name == "Eliminar")
+            {
+            }
         }
     }
 }

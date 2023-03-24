@@ -2,6 +2,6 @@
 {
     public class enumTextos
     {
-        public enum AccionPantalla { Alta, Cambios, Bajas }
+        public enum AccionPantalla { Alta, Cambios, Elimina }
     }
 }

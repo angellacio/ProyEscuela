@@ -48,6 +48,12 @@
             this.txtCos_Observaciones = new System.Windows.Forms.TextBox();
             this.btnMonto = new System.Windows.Forms.Button();
             this.dgvEquElec_Costos = new System.Windows.Forms.DataGridView();
+            this.clRegEqui_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clRegEqui_TipoMonto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clRegEqui_PoCobrar = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clRegEqui_Cobrados = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clRegEqui_Observacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clRegEqui_ButtonBorrar = new System.Windows.Forms.DataGridViewImageColumn();
             this.lblMonto = new System.Windows.Forms.Label();
             this.cmbCos_TipoCosto = new System.Windows.Forms.ComboBox();
             this.lblTipoMonto = new System.Windows.Forms.Label();
@@ -65,12 +71,8 @@
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnNuevoTipoEquipo = new System.Windows.Forms.Button();
             this.btnBuscarCliente = new System.Windows.Forms.Button();
-            this.clRegEqui_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clRegEqui_TipoMonto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clRegEqui_PoCobrar = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clRegEqui_Cobrados = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clRegEqui_Observacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.clRegEqui_ButtonBorrar = new System.Windows.Forms.DataGridViewImageColumn();
+            this.cmbEstado = new System.Windows.Forms.ComboBox();
+            this.lblEstado = new System.Windows.Forms.Label();
             this.tbcEquipoElectronico.SuspendLayout();
             this.tbpCostos.SuspendLayout();
             this.gbObservaciones.SuspendLayout();
@@ -132,11 +134,13 @@
             // 
             // cmbTipoEquipo
             // 
+            this.cmbTipoEquipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTipoEquipo.FormattingEnabled = true;
             this.cmbTipoEquipo.Location = new System.Drawing.Point(96, 70);
             this.cmbTipoEquipo.Name = "cmbTipoEquipo";
-            this.cmbTipoEquipo.Size = new System.Drawing.Size(256, 21);
+            this.cmbTipoEquipo.Size = new System.Drawing.Size(161, 21);
             this.cmbTipoEquipo.TabIndex = 7;
+            this.cmbTipoEquipo.SelectedIndexChanged += new System.EventHandler(this.cmbTipoEquipo_SelectedIndexChanged);
             // 
             // lblMarca
             // 
@@ -153,6 +157,7 @@
             this.txtMarca.Name = "txtMarca";
             this.txtMarca.Size = new System.Drawing.Size(256, 20);
             this.txtMarca.TabIndex = 10;
+            this.txtMarca.Leave += new System.EventHandler(this.txtMarca_Leave);
             // 
             // txtNumSerie
             // 
@@ -160,6 +165,7 @@
             this.txtNumSerie.Name = "txtNumSerie";
             this.txtNumSerie.Size = new System.Drawing.Size(256, 20);
             this.txtNumSerie.TabIndex = 12;
+            this.txtNumSerie.Leave += new System.EventHandler(this.txtNumSerie_Leave);
             // 
             // lblNumeroSerie
             // 
@@ -185,8 +191,9 @@
             this.txtObservaciones.Multiline = true;
             this.txtObservaciones.Name = "txtObservaciones";
             this.txtObservaciones.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.txtObservaciones.Size = new System.Drawing.Size(256, 49);
+            this.txtObservaciones.Size = new System.Drawing.Size(361, 49);
             this.txtObservaciones.TabIndex = 14;
+            this.txtObservaciones.Leave += new System.EventHandler(this.txtObservaciones_Leave);
             // 
             // tbcEquipoElectronico
             // 
@@ -281,6 +288,57 @@
             this.dgvEquElec_Costos.ShowRowErrors = false;
             this.dgvEquElec_Costos.Size = new System.Drawing.Size(476, 133);
             this.dgvEquElec_Costos.TabIndex = 9;
+            this.dgvEquElec_Costos.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvEquElec_Costos_CellClick);
+            // 
+            // clRegEqui_ID
+            // 
+            this.clRegEqui_ID.DataPropertyName = "nIDCosto";
+            this.clRegEqui_ID.HeaderText = "ID";
+            this.clRegEqui_ID.Name = "clRegEqui_ID";
+            this.clRegEqui_ID.ReadOnly = true;
+            this.clRegEqui_ID.Width = 43;
+            // 
+            // clRegEqui_TipoMonto
+            // 
+            this.clRegEqui_TipoMonto.DataPropertyName = "sTipoCosto";
+            this.clRegEqui_TipoMonto.HeaderText = "Tipo Monto";
+            this.clRegEqui_TipoMonto.Name = "clRegEqui_TipoMonto";
+            this.clRegEqui_TipoMonto.ReadOnly = true;
+            this.clRegEqui_TipoMonto.Width = 86;
+            // 
+            // clRegEqui_PoCobrar
+            // 
+            this.clRegEqui_PoCobrar.DataPropertyName = "mPorCobrar";
+            this.clRegEqui_PoCobrar.HeaderText = "Por Cobrar";
+            this.clRegEqui_PoCobrar.Name = "clRegEqui_PoCobrar";
+            this.clRegEqui_PoCobrar.ReadOnly = true;
+            this.clRegEqui_PoCobrar.Width = 82;
+            // 
+            // clRegEqui_Cobrados
+            // 
+            this.clRegEqui_Cobrados.DataPropertyName = "mCobrado";
+            this.clRegEqui_Cobrados.HeaderText = "Cobrados";
+            this.clRegEqui_Cobrados.Name = "clRegEqui_Cobrados";
+            this.clRegEqui_Cobrados.ReadOnly = true;
+            this.clRegEqui_Cobrados.Width = 77;
+            // 
+            // clRegEqui_Observacion
+            // 
+            this.clRegEqui_Observacion.DataPropertyName = "sObservaciones";
+            this.clRegEqui_Observacion.HeaderText = "Observación";
+            this.clRegEqui_Observacion.Name = "clRegEqui_Observacion";
+            this.clRegEqui_Observacion.ReadOnly = true;
+            this.clRegEqui_Observacion.Width = 92;
+            // 
+            // clRegEqui_ButtonBorrar
+            // 
+            this.clRegEqui_ButtonBorrar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.clRegEqui_ButtonBorrar.HeaderText = "Borrar";
+            this.clRegEqui_ButtonBorrar.Image = global::AppElectronica.Properties.Resources.Borrar;
+            this.clRegEqui_ButtonBorrar.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
+            this.clRegEqui_ButtonBorrar.Name = "clRegEqui_ButtonBorrar";
+            this.clRegEqui_ButtonBorrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.clRegEqui_ButtonBorrar.Width = 41;
             // 
             // lblMonto
             // 
@@ -428,12 +486,13 @@
             this.btnLimpiar.TabIndex = 16;
             this.btnLimpiar.Tag = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
             // 
             // btnNuevoTipoEquipo
             // 
             this.btnNuevoTipoEquipo.BackgroundImage = global::AppElectronica.Properties.Resources.Agregar;
             this.btnNuevoTipoEquipo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnNuevoTipoEquipo.Location = new System.Drawing.Point(358, 70);
+            this.btnNuevoTipoEquipo.Location = new System.Drawing.Point(269, 68);
             this.btnNuevoTipoEquipo.Name = "btnNuevoTipoEquipo";
             this.btnNuevoTipoEquipo.Size = new System.Drawing.Size(33, 23);
             this.btnNuevoTipoEquipo.TabIndex = 8;
@@ -452,61 +511,31 @@
             this.btnBuscarCliente.UseVisualStyleBackColor = false;
             this.btnBuscarCliente.Click += new System.EventHandler(this.btnBuscarCliente_Click);
             // 
-            // clRegEqui_ID
+            // cmbEstado
             // 
-            this.clRegEqui_ID.DataPropertyName = "nIDCosto";
-            this.clRegEqui_ID.HeaderText = "ID";
-            this.clRegEqui_ID.Name = "clRegEqui_ID";
-            this.clRegEqui_ID.ReadOnly = true;
-            this.clRegEqui_ID.Width = 43;
+            this.cmbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbEstado.FormattingEnabled = true;
+            this.cmbEstado.Location = new System.Drawing.Point(357, 71);
+            this.cmbEstado.Name = "cmbEstado";
+            this.cmbEstado.Size = new System.Drawing.Size(144, 21);
+            this.cmbEstado.TabIndex = 19;
             // 
-            // clRegEqui_TipoMonto
+            // lblEstado
             // 
-            this.clRegEqui_TipoMonto.DataPropertyName = "sTipoCosto";
-            this.clRegEqui_TipoMonto.HeaderText = "Tipo Monto";
-            this.clRegEqui_TipoMonto.Name = "clRegEqui_TipoMonto";
-            this.clRegEqui_TipoMonto.ReadOnly = true;
-            this.clRegEqui_TipoMonto.Width = 86;
-            // 
-            // clRegEqui_PoCobrar
-            // 
-            this.clRegEqui_PoCobrar.DataPropertyName = "mPorCobrar";
-            this.clRegEqui_PoCobrar.HeaderText = "Por Cobrar";
-            this.clRegEqui_PoCobrar.Name = "clRegEqui_PoCobrar";
-            this.clRegEqui_PoCobrar.ReadOnly = true;
-            this.clRegEqui_PoCobrar.Width = 82;
-            // 
-            // clRegEqui_Cobrados
-            // 
-            this.clRegEqui_Cobrados.DataPropertyName = "mCobrado";
-            this.clRegEqui_Cobrados.HeaderText = "Cobrados";
-            this.clRegEqui_Cobrados.Name = "clRegEqui_Cobrados";
-            this.clRegEqui_Cobrados.ReadOnly = true;
-            this.clRegEqui_Cobrados.Width = 77;
-            // 
-            // clRegEqui_Observacion
-            // 
-            this.clRegEqui_Observacion.DataPropertyName = "sObservaciones";
-            this.clRegEqui_Observacion.HeaderText = "Observación";
-            this.clRegEqui_Observacion.Name = "clRegEqui_Observacion";
-            this.clRegEqui_Observacion.ReadOnly = true;
-            this.clRegEqui_Observacion.Width = 92;
-            // 
-            // clRegEqui_ButtonBorrar
-            // 
-            this.clRegEqui_ButtonBorrar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.clRegEqui_ButtonBorrar.HeaderText = "Borrar";
-            this.clRegEqui_ButtonBorrar.Image = global::AppElectronica.Properties.Resources.Borrar;
-            this.clRegEqui_ButtonBorrar.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
-            this.clRegEqui_ButtonBorrar.Name = "clRegEqui_ButtonBorrar";
-            this.clRegEqui_ButtonBorrar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.clRegEqui_ButtonBorrar.Width = 41;
+            this.lblEstado.AutoSize = true;
+            this.lblEstado.Location = new System.Drawing.Point(308, 74);
+            this.lblEstado.Name = "lblEstado";
+            this.lblEstado.Size = new System.Drawing.Size(43, 13);
+            this.lblEstado.TabIndex = 18;
+            this.lblEstado.Text = "Estado:";
             // 
             // frmEquipoElectronico
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(506, 441);
+            this.Controls.Add(this.cmbEstado);
+            this.Controls.Add(this.lblEstado);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.tbcEquipoElectronico);
@@ -586,5 +615,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clRegEqui_Cobrados;
         private System.Windows.Forms.DataGridViewTextBoxColumn clRegEqui_Observacion;
         private System.Windows.Forms.DataGridViewImageColumn clRegEqui_ButtonBorrar;
+        private System.Windows.Forms.ComboBox cmbEstado;
+        private System.Windows.Forms.Label lblEstado;
     }
 }

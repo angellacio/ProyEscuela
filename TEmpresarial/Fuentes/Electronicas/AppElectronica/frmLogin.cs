@@ -62,5 +62,13 @@ namespace AppElectronica
         {
             validaCampos();
         }
+
+        private void txtContrasenia_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                btnEntrar_Click(sender, null);
+            }
+        }
     }
 }

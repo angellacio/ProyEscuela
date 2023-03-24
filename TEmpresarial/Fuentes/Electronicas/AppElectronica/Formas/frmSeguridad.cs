@@ -22,11 +22,11 @@ namespace AppElectronica.Formas
                 this.btnSeg_Guardar.BackgroundImage = global::AppElectronica.Properties.Resources.Actualizar;
                 this.btnSeg_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             }
-            else if (accionpant == Electronica_Entidades.enumTextos.AccionPantalla.Bajas)
-            {
-                this.btnSeg_Guardar.BackgroundImage = global::AppElectronica.Properties.Resources.Borrar;
-                this.btnSeg_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            }
+            //else if (accionpant == Electronica_Entidades.enumTextos.AccionPantalla.Bajas)
+            //{
+            //    this.btnSeg_Guardar.BackgroundImage = global::AppElectronica.Properties.Resources.Borrar;
+            //    this.btnSeg_Guardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            //}
         }
 
         public Electronica_Entidades.enumTextos.AccionPantalla accionPant { get; set; }
@@ -50,14 +50,14 @@ namespace AppElectronica.Formas
             txtSeg_Contrasenia.Text = itemAlterar.sContrasenia.Trim();
             ckbSeg_Estado.Checked = itemAlterar.bEstado;
         }
-        private void EstadoComponentes(bool bolEstado)
+        private void EstadoComponentes() // bool bolEstado)
         {
-            txtSeg_Apellido1.ReadOnly = bolEstado;
-            txtSeg_Apellido2.ReadOnly = bolEstado;
-            txtSeg_Nombre.ReadOnly = bolEstado;
-            txtSeg_Usuario.ReadOnly = bolEstado;
-            txtSeg_Contrasenia.ReadOnly = bolEstado;
-            ckbSeg_Estado.Enabled = !bolEstado;
+            txtSeg_Apellido1.ReadOnly = !itemAlterar.bEstado; // bolEstado;
+            txtSeg_Apellido2.ReadOnly = !itemAlterar.bEstado; // bolEstado;
+            txtSeg_Nombre.ReadOnly = !itemAlterar.bEstado; // bolEstado;
+            txtSeg_Usuario.ReadOnly = !itemAlterar.bEstado; // bolEstado;
+            txtSeg_Contrasenia.ReadOnly = !itemAlterar.bEstado; // bolEstado;
+            //ckbSeg_Estado.Enabled = itemAlterar.bEstado; // bolEstado;
         }
         private void validaCampos()
         {
@@ -71,35 +71,45 @@ namespace AppElectronica.Formas
         private void frmSeguridad_Load(object sender, EventArgs e)
         {
             Limpiar();
-            EstadoComponentes(true);
-            switch (accionPant)
+            if (accionPant == Electronica_Entidades.enumTextos.AccionPantalla.Cambios)
             {
-                case Electronica_Entidades.enumTextos.AccionPantalla.Bajas:
-                    LlenaDatos();
-                    break;
-                case Electronica_Entidades.enumTextos.AccionPantalla.Cambios:
-                    LlenaDatos();
-                    EstadoComponentes(false);
-                    break;
-                case Electronica_Entidades.enumTextos.AccionPantalla.Alta:
-                    EstadoComponentes(false);
-                    break;
+                LlenaDatos();
             }
+            else
+            {
+                itemAlterar = new Electronica_Entidades.entSeguridad() { bEstado = true };
+            }
+            //switch (accionPant)
+            //{
+            //    case Electronica_Entidades.enumTextos.AccionPantalla.Bajas:
+            //        LlenaDatos();
+            //        break;
+            //    case Electronica_Entidades.enumTextos.AccionPantalla.Cambios:
+            //        LlenaDatos();        
+            //        EstadoComponentes(false);
+            //        break;
+            //    case Electronica_Entidades.enumTextos.AccionPantalla.Alta:
+            //        EstadoComponentes(false);
+            //        break;
+            //}
+
+            EstadoComponentes(); // true);
             validaCampos();
         }
 
         private void btnSeg_Limpiar_Click(object sender, EventArgs e)
         {
             Limpiar();
-            switch (accionPant)
-            {
-                case Electronica_Entidades.enumTextos.AccionPantalla.Bajas:
-                    LlenaDatos();
-                    break;
-                case Electronica_Entidades.enumTextos.AccionPantalla.Cambios:
-                    LlenaDatos();
-                    break;
-            }
+            LlenaDatos();
+            //switch (accionPant)
+            //{
+            //    case Electronica_Entidades.enumTextos.AccionPantalla.Bajas:
+            //        LlenaDatos();
+            //        break;
+            //    case Electronica_Entidades.enumTextos.AccionPantalla.Cambios:
+            //        LlenaDatos();
+            //        break;
+            //}
         }
 
         private void btnSeg_Guardar_Click(object sender, EventArgs e)
@@ -113,9 +123,9 @@ namespace AppElectronica.Formas
                 
                 switch (accionPant)
                 {
-                    case Electronica_Entidades.enumTextos.AccionPantalla.Bajas:
-                        mRN.mUsuarios.ActualizaUsuario(itemAlterar.nId, itemAlterar.sApellido1, itemAlterar.sApellido2, itemAlterar.sNombre, itemAlterar.sUsuario, itemAlterar.sContrasenia, ckbSeg_Estado.Checked);
-                        break;
+                    //case Electronica_Entidades.enumTextos.AccionPantalla.Bajas:
+                    //    mRN.mUsuarios.ActualizaUsuario(itemAlterar.nId, itemAlterar.sApellido1, itemAlterar.sApellido2, itemAlterar.sNombre, itemAlterar.sUsuario, itemAlterar.sContrasenia, ckbSeg_Estado.Checked);
+                    //    break;
                     case Electronica_Entidades.enumTextos.AccionPantalla.Cambios:
                         mRN.mUsuarios.ActualizaUsuario(itemAlterar.nId, txtSeg_Apellido1.Text.Trim(), txtSeg_Apellido2.Text.Trim(), txtSeg_Nombre.Text.Trim(), txtSeg_Usuario.Text.Trim(), txtSeg_Contrasenia.Text.Trim(), ckbSeg_Estado.Checked);
                         break;

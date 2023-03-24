@@ -43,7 +43,7 @@ namespace Elec_AccesoBD
         {
             List<ent.entTaller> result = null;
             SqlDataReader sqlDR = null;
-            string sQuery = "SELECT eE.IdEquipo, eE.IdCliente, eC.Apellido1, eC.Apellido2, eC.Nombre, eC.CURP, eC.RFC, eC.Telefono, eC.Correo, eC.Direccion, eD.IdTabla, eE.IdTipoEquipo, eD.Descripcion 'TipoEquipo', eE.Marca, eE.NumeroSerie, eE.Observaciones, eE.FechaAlta, eE.FechaBaja, eE.IdEstatus, eD1.Descripcion 'Estatus', vCA.PorCobrar, vCA.Cobrados, vCA.Neto FROM elecEquipo eE INNER JOIN elecCliente eC ON eE.IdCliente = eC.IdCliente INNER JOIN elecDescripcion eD ON eE.IdTipoEquipo = eD.IdDescripcion AND eD.IdTabla = 2 INNER JOIN vw_CososAcomulado vCA ON eE.IdEquipo = vCA.IdEquipo INNER JOIN elecDescripcion eD1 ON eE.IdEstatus = eD1.IdDescripcion AND eD1.IdTabla = 1 WHERE";
+            string sQuery = "SELECT eE.IdEquipo, eE.IdCliente, eC.Apellido1, eC.Apellido2, eC.Nombre, eC.CURP, eC.RFC, eC.Telefono, eC.Correo, eC.Direccion, eD.IdTabla, eE.IdTipoEquipo, eD.Descripcion 'TipoEquipo', eE.Marca, eE.NumeroSerie, eE.Observaciones, eE.FechaAlta, eE.FechaBaja, eE.IdEstatus, eD1.Descripcion 'Estatus', ISNULL(vCA.PorCobrar, 0) 'PorCobrar', ISNULL(vCA.Cobrados, 0) 'Cobrados', ISNULL(vCA.Neto, 0) 'Neto' FROM elecEquipo eE INNER JOIN elecCliente eC ON eE.IdCliente = eC.IdCliente INNER JOIN elecDescripcion eD ON eE.IdTipoEquipo = eD.IdDescripcion AND eD.IdTabla = 2 LEFT OUTER JOIN vw_CososAcomulado vCA ON eE.IdEquipo = vCA.IdEquipo INNER JOIN elecDescripcion eD1 ON eE.IdEstatus = eD1.IdDescripcion AND eD1.IdTabla = 1 WHERE";
             try
             {
                 result = new List<ent.entTaller>();
@@ -183,6 +183,7 @@ namespace Elec_AccesoBD
 
         public int EquipoAlta(ent.entTaller itemAlta)
         {
+            object idBD;
             int nResult = -1;
             string sQuery = "INSERT INTO elecEquipo(IdCliente, IdTipoEquipo, Marca, NumeroSerie, Observaciones, FechaAlta, FechaBaja, IdEstatus) VALUES(@IdCliente, @IdTipoEquipo, @Marca, @NumeroSerie, @Observaciones, GetDate(), null, @IdEstatus) SELECT SCOPE_IDENTITY()";
             try
@@ -192,7 +193,7 @@ namespace Elec_AccesoBD
 
                 sqlCom.Parameters.Add(new SqlParameter("@IdCliente", SqlDbType.Int)).Value = itemAlta.nIdCliente;
                 sqlCom.Parameters.Add(new SqlParameter("@IdTipoEquipo", SqlDbType.Int)).Value = itemAlta.nIdTipoEquipo;
-                sqlCom.Parameters.Add(new SqlParameter("@Marca", SqlDbType.Int)).Value = itemAlta.sMarca;
+                sqlCom.Parameters.Add(new SqlParameter("@Marca", SqlDbType.NVarChar)).Value = itemAlta.sMarca;
                 sqlCom.Parameters.Add(new SqlParameter("@NumeroSerie", SqlDbType.NVarChar)).Value = itemAlta.sNumSerie;
                 sqlCom.Parameters.Add(new SqlParameter("@Observaciones", SqlDbType.NVarChar)).Value = itemAlta.sObservaciones;
                 sqlCom.Parameters.Add(new SqlParameter("@IdEstatus", SqlDbType.Int)).Value = itemAlta.nEstatus;
@@ -201,7 +202,9 @@ namespace Elec_AccesoBD
 
                 sqlCom.CommandType = CommandType.Text;
 
-                nResult = (int)sqlCom.ExecuteScalar();
+                idBD = sqlCom.ExecuteScalar();
+
+                nResult = (int)int.Parse(idBD.ToString());
             }
             catch (ApplicationException ex)
             {
@@ -213,13 +216,9 @@ namespace Elec_AccesoBD
                 mEx.Logs.MenejoLog.mensajeError(ex.Message);
                 throw new ApplicationException("Error al registrar el equipo electronico.", ex);
             }
-            finally
-            {
-                Finaliza();
-            }
+            finally { }
             return nResult;
         }
-
         public void EquipoCostoAlta(int nEquipo, ent.entTallerCosto itemCosto)
         {
             string sQuery = "INSERT INTO elecEquipoMontos(IdEquipo, IdTipoMonto, Monto, Observaciones) VALUES(@nIdEquipo, @nIdTipoMonto, @dMonto, @sObservaciones)";
@@ -231,7 +230,7 @@ namespace Elec_AccesoBD
                 sqlCom.Parameters.Add(new SqlParameter("@nIdEquipo", SqlDbType.Int)).Value = nEquipo;
                 sqlCom.Parameters.Add(new SqlParameter("@nIdTipoMonto", SqlDbType.Int)).Value = itemCosto.nIdTipoCosto;
                 sqlCom.Parameters.Add(new SqlParameter("@dMonto", SqlDbType.Decimal)).Value = itemCosto.mMonto;
-                sqlCom.Parameters.Add(new SqlParameter("@Observaciones", SqlDbType.NVarChar)).Value = itemCosto.sObservaciones;
+                sqlCom.Parameters.Add(new SqlParameter("@sObservaciones", SqlDbType.NVarChar)).Value = itemCosto.sObservaciones;
 
                 sqlCom.CommandText = sQuery;
 
@@ -249,10 +248,42 @@ namespace Elec_AccesoBD
                 mEx.Logs.MenejoLog.mensajeError(ex.Message);
                 throw new ApplicationException("Error al registrar el equipo electronico.", ex);
             }
-            finally
+            finally { }
+        }
+
+        public void EquipoActualiza(ent.entTaller itemAlta)
+        {
+            string sQuery = "UPDATE elecEquipo SET IdCliente = @IdCliente, IdTipoEquipo = @IdTipoEquipo, Marca = @Marca, NumeroSerie = @NumeroSerie, Observaciones = @Observaciones, IdEstatus = @IdEstatus, FechaBaja = CASE @IdEstatus WHEN 2 THEN GetDate() ELSE NULL END WHERE IdEquipo = @IdEquipo";
+            try
             {
-                Finaliza();
+                if (sqlCon.State == ConnectionState.Closed) sqlCon.Open();
+                sqlCom = sqlCon.CreateCommand();
+
+                sqlCom.Parameters.Add(new SqlParameter("@IdEquipo", SqlDbType.Int)).Value = itemAlta.nIdTaller;
+                sqlCom.Parameters.Add(new SqlParameter("@IdCliente", SqlDbType.Int)).Value = itemAlta.nIdCliente;
+                sqlCom.Parameters.Add(new SqlParameter("@IdTipoEquipo", SqlDbType.Int)).Value = itemAlta.nIdTipoEquipo;
+                sqlCom.Parameters.Add(new SqlParameter("@Marca", SqlDbType.NVarChar)).Value = itemAlta.sMarca;
+                sqlCom.Parameters.Add(new SqlParameter("@NumeroSerie", SqlDbType.NVarChar)).Value = itemAlta.sNumSerie;
+                sqlCom.Parameters.Add(new SqlParameter("@Observaciones", SqlDbType.NVarChar)).Value = itemAlta.sObservaciones;
+                sqlCom.Parameters.Add(new SqlParameter("@IdEstatus", SqlDbType.Int)).Value = itemAlta.nEstatus;
+
+                sqlCom.CommandText = sQuery;
+
+                sqlCom.CommandType = CommandType.Text;
+
+                sqlCom.ExecuteNonQuery();
             }
+            catch (ApplicationException ex)
+            {
+                mEx.Logs.MenejoLog.mensajeAlerta(ex.Message);
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                mEx.Logs.MenejoLog.mensajeError(ex.Message);
+                throw new ApplicationException("Error al registrar el equipo electronico.", ex);
+            }
+            finally { }
         }
         public void EquipoCostoActualiza(int nEquipo, ent.entTallerCosto itemCosto)
         {
@@ -285,9 +316,36 @@ namespace Elec_AccesoBD
                 throw new ApplicationException("Error al registrar el equipo electronico.", ex);
             }
             finally
+            {}
+        }
+        public void EquipoCostoElimina(int nIdEquipoMonto)
+        {
+            string sQuery = "DELETE FROM elecEquipoMontos WHERE IdEquipoMonto = @nIdEquipoMonto";
+            try
             {
-                Finaliza();
+                if (sqlCon.State == ConnectionState.Closed) sqlCon.Open();
+                sqlCom = sqlCon.CreateCommand();
+
+                sqlCom.Parameters.Add(new SqlParameter("@nIdEquipoMonto", SqlDbType.Int)).Value = nIdEquipoMonto;
+                
+                sqlCom.CommandText = sQuery;
+
+                sqlCom.CommandType = CommandType.Text;
+
+                sqlCom.ExecuteNonQuery();
             }
+            catch (ApplicationException ex)
+            {
+                mEx.Logs.MenejoLog.mensajeAlerta(ex.Message);
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                mEx.Logs.MenejoLog.mensajeError(ex.Message);
+                throw new ApplicationException("Error al registrar el equipo electronico.", ex);
+            }
+            finally
+            {}
         }
     }
 }

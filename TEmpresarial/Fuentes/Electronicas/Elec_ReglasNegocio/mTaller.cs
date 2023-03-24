@@ -100,5 +100,46 @@ namespace Electronica_ReglasNegocio
             }
         }
 
+        public static void EquipoActualiza(ent.entTaller itemActualiza)
+        {
+            mBD.manejoTaller mTaller = null;
+            int nIdEquipo = 0;
+            try
+            {
+                mTaller = new mBD.manejoTaller();
+                nIdEquipo = itemActualiza.nIdTaller;
+                
+                mTaller.EquipoActualiza(itemActualiza);
+
+                itemActualiza.lstCostos.ForEach(itemC =>
+                {
+                    if (itemC.accionPantalla == ent.enumTextos.AccionPantalla.Alta)
+                    {
+                        mTaller.EquipoCostoAlta(nIdEquipo, itemC);
+                    }
+                    else if (itemC.accionPantalla == ent.enumTextos.AccionPantalla.Elimina)
+                    {
+                        if (itemC.nIDCosto > 0)
+                        {
+                            mTaller.EquipoCostoElimina(itemC.nIDCosto);
+                        }
+                    }
+                });
+            }
+            catch (ApplicationException ex)
+            {
+                mEx.Logs.MenejoLog.mensajeAlerta(ex.Message);
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                mEx.Logs.MenejoLog.mensajeError(ex.Message);
+                throw new ApplicationException("Error al consultar los equipos electronicos.", ex);
+            }
+            finally
+            {
+                mTaller.Finaliza();
+            }
+        }
     }
 }

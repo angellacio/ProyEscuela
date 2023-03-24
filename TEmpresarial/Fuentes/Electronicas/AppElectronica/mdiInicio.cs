@@ -37,12 +37,12 @@ namespace AppElectronica
                     pantCientes.Show();
                     break;
                 case 2:
-                case 3:
                     pantCientesBusqueda = new Formas.frmCliente_Busqueda();
                     if (pantCientesBusqueda.ShowDialog() == DialogResult.OK)
                     {
-                        if (nPantalla == 2) pantCientes = new Formas.frmClientes(string.Format("Modificar el cliente {0} - {1}.", pantCientesBusqueda.itemModificar.nId, pantCientesBusqueda.itemModificar.sNombreCompleto), Electronica_Entidades.enumTextos.AccionPantalla.Cambios);
-                        else pantCientes = new Formas.frmClientes(string.Format("Elimina el cliente {0} - {1}.", pantCientesBusqueda.itemModificar.nId, pantCientesBusqueda.itemModificar.sNombreCompleto), Electronica_Entidades.enumTextos.AccionPantalla.Bajas);
+                        //if (nPantalla == 2) pantCientes = new Formas.frmClientes(string.Format("Modificar el cliente {0} - {1}.", pantCientesBusqueda.itemModificar.nId, pantCientesBusqueda.itemModificar.sNombreCompleto), Electronica_Entidades.enumTextos.AccionPantalla.Cambios);
+                        //else pantCientes = new Formas.frmClientes(string.Format("Elimina el cliente {0} - {1}.", pantCientesBusqueda.itemModificar.nId, pantCientesBusqueda.itemModificar.sNombreCompleto), Electronica_Entidades.enumTextos.AccionPantalla.Bajas);
+                        pantCientes = new Formas.frmClientes(string.Format("Modificar el cliente {0} - {1}.", pantCientesBusqueda.itemModificar.nId, pantCientesBusqueda.itemModificar.sNombreCompleto), Electronica_Entidades.enumTextos.AccionPantalla.Cambios);
 
                         pantCientes.itemAlterar = pantCientesBusqueda.itemModificar;
                         pantCientes.MdiParent = this;
@@ -59,7 +59,7 @@ namespace AppElectronica
                     pantEquipoElectronicoBusqueda = new Formas.frmEquipoElectronico_Busqueda();
                     if (pantEquipoElectronicoBusqueda.ShowDialog() == DialogResult.OK)
                     {
-                        pantEquipoElectronico = new Formas.frmEquipoElectronico(string.Format("Salida de equipo electronico. Cliente: {0}, equipo {1}", "", ""), Electronica_Entidades.enumTextos.AccionPantalla.Cambios);
+                        pantEquipoElectronico = new Formas.frmEquipoElectronico(string.Format("Seguimiento de equipo electronico. Cliente: {0}, equipo {1}", "", ""), Electronica_Entidades.enumTextos.AccionPantalla.Cambios);
                         pantEquipoElectronico.itemAlterar = pantEquipoElectronicoBusqueda.itemModificar;
                         pantEquipoElectronico.llenaPantalla();
                         pantEquipoElectronico.MdiParent = this;
@@ -77,12 +77,12 @@ namespace AppElectronica
                     pantSeguridad.Show();
                     break;
                 case 31:
-                case 32:
                     pantSeguridadBusqueda = new Formas.frmSeguridad_Busqueda();
                     if (pantSeguridadBusqueda.ShowDialog() == DialogResult.OK)
                     {
-                        if (nPantalla == 31) pantSeguridad = new Formas.frmSeguridad(string.Format("Modificar el usuario {0} - {1}.", pantSeguridadBusqueda.itemModificar.nId, pantSeguridadBusqueda.itemModificar.sNombreCompleto), Electronica_Entidades.enumTextos.AccionPantalla.Cambios);
-                        else pantSeguridad = new Formas.frmSeguridad(string.Format("Elimina el usuario {0} - {1}.", pantSeguridadBusqueda.itemModificar.nId, pantSeguridadBusqueda.itemModificar.sNombreCompleto), Electronica_Entidades.enumTextos.AccionPantalla.Bajas);
+                        //if (nPantalla == 31) pantSeguridad = new Formas.frmSeguridad(string.Format("Modificar el usuario {0} - {1}.", pantSeguridadBusqueda.itemModificar.nId, pantSeguridadBusqueda.itemModificar.sNombreCompleto), Electronica_Entidades.enumTextos.AccionPantalla.Cambios);
+                        //else pantSeguridad = new Formas.frmSeguridad(string.Format("Elimina el usuario {0} - {1}.", pantSeguridadBusqueda.itemModificar.nId, pantSeguridadBusqueda.itemModificar.sNombreCompleto), Electronica_Entidades.enumTextos.AccionPantalla.Bajas);
+                        pantSeguridad = new Formas.frmSeguridad(string.Format("Modificar el usuario {0} - {1}.", pantSeguridadBusqueda.itemModificar.nId, pantSeguridadBusqueda.itemModificar.sNombreCompleto), Electronica_Entidades.enumTextos.AccionPantalla.Cambios);
 
                         pantSeguridad.itemAlterar = pantSeguridadBusqueda.itemModificar;
                         pantSeguridad.MdiParent = this;
@@ -99,10 +99,6 @@ namespace AppElectronica
         private void mCli_Cambios_Click(object sender, EventArgs e)
         {
             MuestraPantalla(2);
-        }
-        private void mCli_Bajas_Click(object sender, EventArgs e)
-        {
-            MuestraPantalla(3);
         }
 
         private void mEqui_Entradas_Click(object sender, EventArgs e)
@@ -125,10 +121,6 @@ namespace AppElectronica
         private void mSeg_Cambios_Click(object sender, EventArgs e)
         {
             MuestraPantalla(31);
-        }
-        private void mSeg_Bajas_Click(object sender, EventArgs e)
-        {
-            MuestraPantalla(32);
         }
 
         private void mVen_Cascada_Click(object sender, EventArgs e)

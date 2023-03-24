@@ -19,7 +19,7 @@ namespace Electronica_Entidades
             sCorreo = "";
             sDireccion = "";
             fBaja = null;
-            bEstdo = false;
+            apEstado = enumTextos.AccionPantalla.Alta;
             lstAutorizados = new List<entCliente>();
         }
 
@@ -34,7 +34,7 @@ namespace Electronica_Entidades
         public string sCorreo { get; set; }
         public string sDireccion { get; set; }
         public Nullable<DateTime> fBaja { get; set; }
-        public Boolean bEstdo { get; set; }
+        public enumTextos.AccionPantalla apEstado { get; set; }
         public List<entCliente> lstAutorizados { get; set; }
 
         public string sNombreCompleto

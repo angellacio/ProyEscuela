@@ -60,6 +60,10 @@
             this.btnCli_Limpiar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.ckbCli_Estado = new System.Windows.Forms.CheckBox();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RFC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Eliminar = new System.Windows.Forms.DataGridViewImageColumn();
             this.tcClientes.SuspendLayout();
             this.tpCli_Contacto.SuspendLayout();
             this.tpCli_Relacion.SuspendLayout();
@@ -251,6 +255,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dtgCli_AutRec.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dtgCli_AutRec.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dtgCli_AutRec.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
+            this.Nombre,
+            this.RFC,
+            this.Eliminar});
             this.dtgCli_AutRec.Location = new System.Drawing.Point(7, 51);
             this.dtgCli_AutRec.MultiSelect = false;
             this.dtgCli_AutRec.Name = "dtgCli_AutRec";
@@ -262,6 +271,7 @@
             this.dtgCli_AutRec.ShowRowErrors = false;
             this.dtgCli_AutRec.Size = new System.Drawing.Size(457, 73);
             this.dtgCli_AutRec.TabIndex = 0;
+            this.dtgCli_AutRec.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgCli_AutRec_CellClick);
             // 
             // lblCli_RFC
             // 
@@ -381,6 +391,38 @@
             this.ckbCli_Estado.Text = "Activo";
             this.ckbCli_Estado.UseVisualStyleBackColor = true;
             // 
+            // Id
+            // 
+            this.Id.DataPropertyName = "nId";
+            this.Id.HeaderText = "ID";
+            this.Id.Name = "Id";
+            this.Id.Width = 43;
+            // 
+            // Nombre
+            // 
+            this.Nombre.DataPropertyName = "sNombreCompleto";
+            this.Nombre.HeaderText = "Nombre";
+            this.Nombre.Name = "Nombre";
+            this.Nombre.Width = 69;
+            // 
+            // RFC
+            // 
+            this.RFC.DataPropertyName = "sRFC";
+            this.RFC.HeaderText = "RFC";
+            this.RFC.Name = "RFC";
+            this.RFC.ReadOnly = true;
+            this.RFC.Width = 53;
+            // 
+            // Eliminar
+            // 
+            this.Eliminar.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.Eliminar.HeaderText = "Borrar";
+            this.Eliminar.Image = global::AppElectronica.Properties.Resources.Borrar;
+            this.Eliminar.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Stretch;
+            this.Eliminar.Name = "Eliminar";
+            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Eliminar.Width = 41;
+            // 
             // frmClientes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -453,5 +495,9 @@
         private System.Windows.Forms.TextBox txtCli_AutRecApellido2;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox txtCli_AutRecApellido1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RFC;
+        private System.Windows.Forms.DataGridViewImageColumn Eliminar;
     }
 }

@@ -31,12 +31,13 @@
             this.components = new System.ComponentModel.Container();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tslUsuario = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tslNombre = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mCliente = new System.Windows.Forms.ToolStripMenuItem();
             this.mCli_Altas = new System.Windows.Forms.ToolStripMenuItem();
             this.mCli_Cambios = new System.Windows.Forms.ToolStripMenuItem();
-            this.mCli_Bajas = new System.Windows.Forms.ToolStripMenuItem();
             this.mEquipoElectro = new System.Windows.Forms.ToolStripMenuItem();
             this.mEqui_Entradas = new System.Windows.Forms.ToolStripMenuItem();
             this.mEqui_Salidas = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,7 +46,6 @@
             this.mSeguridad = new System.Windows.Forms.ToolStripMenuItem();
             this.mSeg_Altas = new System.Windows.Forms.ToolStripMenuItem();
             this.mSeg_Cambios = new System.Windows.Forms.ToolStripMenuItem();
-            this.mSeg_Bajas = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.mVentana = new System.Windows.Forms.ToolStripMenuItem();
             this.mVen_Cascada = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,8 +53,6 @@
             this.mVen_Horizontal = new System.Windows.Forms.ToolStripMenuItem();
             this.mVen_CerrarTodo = new System.Windows.Forms.ToolStripMenuItem();
             this.mSalir = new System.Windows.Forms.ToolStripMenuItem();
-            this.tslUsuario = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tslNombre = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -77,6 +75,18 @@
             this.toolStripStatusLabel.Size = new System.Drawing.Size(42, 17);
             this.toolStripStatusLabel.Text = "Estado";
             // 
+            // tslUsuario
+            // 
+            this.tslUsuario.Name = "tslUsuario";
+            this.tslUsuario.Size = new System.Drawing.Size(47, 17);
+            this.tslUsuario.Text = "Usuario";
+            // 
+            // tslNombre
+            // 
+            this.tslNombre.Name = "tslNombre";
+            this.tslNombre.Size = new System.Drawing.Size(51, 17);
+            this.tslNombre.Text = "Nombre";
+            // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -98,8 +108,7 @@
             // 
             this.mCliente.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mCli_Altas,
-            this.mCli_Cambios,
-            this.mCli_Bajas});
+            this.mCli_Cambios});
             this.mCliente.Name = "mCliente";
             this.mCliente.Size = new System.Drawing.Size(61, 20);
             this.mCliente.Text = "Clientes";
@@ -108,24 +117,17 @@
             // 
             this.mCli_Altas.Image = global::AppElectronica.Properties.Resources.Agregar;
             this.mCli_Altas.Name = "mCli_Altas";
-            this.mCli_Altas.Size = new System.Drawing.Size(121, 22);
+            this.mCli_Altas.Size = new System.Drawing.Size(180, 22);
             this.mCli_Altas.Text = "Altas";
             this.mCli_Altas.Click += new System.EventHandler(this.mCli_Altas_Click);
             // 
             // mCli_Cambios
             // 
+            this.mCli_Cambios.Image = global::AppElectronica.Properties.Resources.Actualizar;
             this.mCli_Cambios.Name = "mCli_Cambios";
-            this.mCli_Cambios.Size = new System.Drawing.Size(121, 22);
+            this.mCli_Cambios.Size = new System.Drawing.Size(180, 22);
             this.mCli_Cambios.Text = "Cambios";
             this.mCli_Cambios.Click += new System.EventHandler(this.mCli_Cambios_Click);
-            // 
-            // mCli_Bajas
-            // 
-            this.mCli_Bajas.Image = global::AppElectronica.Properties.Resources.Borrar;
-            this.mCli_Bajas.Name = "mCli_Bajas";
-            this.mCli_Bajas.Size = new System.Drawing.Size(121, 22);
-            this.mCli_Bajas.Text = "Bajas";
-            this.mCli_Bajas.Click += new System.EventHandler(this.mCli_Bajas_Click);
             // 
             // mEquipoElectro
             // 
@@ -140,16 +142,16 @@
             // 
             this.mEqui_Entradas.Image = global::AppElectronica.Properties.Resources.Agregar;
             this.mEqui_Entradas.Name = "mEqui_Entradas";
-            this.mEqui_Entradas.Size = new System.Drawing.Size(114, 22);
+            this.mEqui_Entradas.Size = new System.Drawing.Size(180, 22);
             this.mEqui_Entradas.Text = "Entrada";
             this.mEqui_Entradas.Click += new System.EventHandler(this.mEqui_Entradas_Click);
             // 
             // mEqui_Salidas
             // 
-            this.mEqui_Salidas.Image = global::AppElectronica.Properties.Resources.Borrar;
+            this.mEqui_Salidas.Image = global::AppElectronica.Properties.Resources.Actualizar;
             this.mEqui_Salidas.Name = "mEqui_Salidas";
-            this.mEqui_Salidas.Size = new System.Drawing.Size(114, 22);
-            this.mEqui_Salidas.Text = "Salida";
+            this.mEqui_Salidas.Size = new System.Drawing.Size(180, 22);
+            this.mEqui_Salidas.Text = "Seguimiento";
             this.mEqui_Salidas.Click += new System.EventHandler(this.mEqui_Salidas_Click);
             // 
             // mReporte
@@ -163,7 +165,7 @@
             // mRep_Recoje
             // 
             this.mRep_Recoje.Name = "mRep_Recoje";
-            this.mRep_Recoje.Size = new System.Drawing.Size(156, 22);
+            this.mRep_Recoje.Size = new System.Drawing.Size(180, 22);
             this.mRep_Recoje.Text = "Clientes equipo";
             this.mRep_Recoje.Click += new System.EventHandler(this.mRep_Recoje_Click);
             // 
@@ -171,8 +173,7 @@
             // 
             this.mSeguridad.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mSeg_Altas,
-            this.mSeg_Cambios,
-            this.mSeg_Bajas});
+            this.mSeg_Cambios});
             this.mSeguridad.Name = "mSeguridad";
             this.mSeguridad.Size = new System.Drawing.Size(72, 20);
             this.mSeguridad.Text = "Seguridad";
@@ -181,24 +182,17 @@
             // 
             this.mSeg_Altas.Image = global::AppElectronica.Properties.Resources.Agregar;
             this.mSeg_Altas.Name = "mSeg_Altas";
-            this.mSeg_Altas.Size = new System.Drawing.Size(121, 22);
+            this.mSeg_Altas.Size = new System.Drawing.Size(180, 22);
             this.mSeg_Altas.Text = "Altas";
             this.mSeg_Altas.Click += new System.EventHandler(this.mSeg_Altas_Click);
             // 
             // mSeg_Cambios
             // 
+            this.mSeg_Cambios.Image = global::AppElectronica.Properties.Resources.Actualizar;
             this.mSeg_Cambios.Name = "mSeg_Cambios";
-            this.mSeg_Cambios.Size = new System.Drawing.Size(121, 22);
+            this.mSeg_Cambios.Size = new System.Drawing.Size(180, 22);
             this.mSeg_Cambios.Text = "Cambios";
             this.mSeg_Cambios.Click += new System.EventHandler(this.mSeg_Cambios_Click);
-            // 
-            // mSeg_Bajas
-            // 
-            this.mSeg_Bajas.Image = global::AppElectronica.Properties.Resources.Borrar;
-            this.mSeg_Bajas.Name = "mSeg_Bajas";
-            this.mSeg_Bajas.Size = new System.Drawing.Size(121, 22);
-            this.mSeg_Bajas.Text = "Bajas";
-            this.mSeg_Bajas.Click += new System.EventHandler(this.mSeg_Bajas_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -251,18 +245,6 @@
             this.mSalir.Text = "Salir";
             this.mSalir.Click += new System.EventHandler(this.mSalir_Click);
             // 
-            // tslUsuario
-            // 
-            this.tslUsuario.Name = "tslUsuario";
-            this.tslUsuario.Size = new System.Drawing.Size(47, 17);
-            this.tslUsuario.Text = "Usuario";
-            // 
-            // tslNombre
-            // 
-            this.tslNombre.Name = "tslNombre";
-            this.tslNombre.Size = new System.Drawing.Size(51, 17);
-            this.tslNombre.Text = "Nombre";
-            // 
             // mdiInicio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -292,7 +274,6 @@
         private System.Windows.Forms.ToolStripMenuItem mCliente;
         private System.Windows.Forms.ToolStripMenuItem mCli_Altas;
         private System.Windows.Forms.ToolStripMenuItem mCli_Cambios;
-        private System.Windows.Forms.ToolStripMenuItem mCli_Bajas;
         private System.Windows.Forms.ToolStripMenuItem mEquipoElectro;
         private System.Windows.Forms.ToolStripMenuItem mEqui_Entradas;
         private System.Windows.Forms.ToolStripMenuItem mEqui_Salidas;
@@ -301,7 +282,6 @@
         private System.Windows.Forms.ToolStripMenuItem mSeguridad;
         private System.Windows.Forms.ToolStripMenuItem mSeg_Altas;
         private System.Windows.Forms.ToolStripMenuItem mSeg_Cambios;
-        private System.Windows.Forms.ToolStripMenuItem mSeg_Bajas;
         private System.Windows.Forms.ToolStripMenuItem mSalir;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem mVentana;

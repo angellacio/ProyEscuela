@@ -11,7 +11,7 @@ namespace Electronica_Entidades
         }
         public entTallerCosto()
         {
-            inicializaComponente(-1, "", -1, "", -1, 0 ,0, 0, "", enumTextos.AccionPantalla.Bajas);
+            inicializaComponente(-1, "", -1, "", -1, 0 ,0, 0, "", enumTextos.AccionPantalla.Elimina);
         }
         private void inicializaComponente(int IdTabla, string Tabla, int IdTipoCosto, string TipoCosto, int IDCosto, Decimal PorCobrar, Decimal Cobrado, Decimal Neto, string Observaciones, enumTextos.AccionPantalla AccionP)
         {

@@ -26,11 +26,11 @@ namespace AppElectronica.Formas
                 this.btnGuardar.BackgroundImage = global::AppElectronica.Properties.Resources.Actualizar;
                 this.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             }
-            else if (accionpant == Electronica_Entidades.enumTextos.AccionPantalla.Bajas)
-            {
-                this.btnGuardar.BackgroundImage = global::AppElectronica.Properties.Resources.Borrar;
-                this.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            }
+            //else if (accionpant == Electronica_Entidades.enumTextos.AccionPantalla.Bajas)
+            //{
+            //    this.btnGuardar.BackgroundImage = global::AppElectronica.Properties.Resources.Borrar;
+            //    this.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            //}
         }
 
         public ent.entTaller itemAlterar { get; set; }
@@ -39,6 +39,7 @@ namespace AppElectronica.Formas
         {
             try
             {
+                LlenaCatalogos();
                 if (accionPant == ent.enumTextos.AccionPantalla.Alta)
                 {
                     itemAlterar = new ent.entTaller(-1, -1, "", "", "", "", "", "", "", "", -1, "", "", "", "", 150, 0, 0, 0, "Alta de equipo");
@@ -48,6 +49,17 @@ namespace AppElectronica.Formas
                 else if (accionPant == ent.enumTextos.AccionPantalla.Cambios)
                 {
                     txtIDCliente.Text = itemAlterar.nIdCliente.ToString();
+
+                    for (int nR = 0; nR < cmbTipoEquipo.Items.Count; nR++)
+                    {
+                        ent.entCatalogoSencillo itemCS = (ent.entCatalogoSencillo)cmbTipoEquipo.Items[nR];
+                        if (itemCS.nID == itemAlterar.nIdTipoEquipo)
+                        {
+                            cmbTipoEquipo.SelectedIndex = nR;
+                            break;
+                        }
+                    }
+
                     lblNombre.Text = itemAlterar.sClienteC;
                     lblRFC.Text = itemAlterar.sCli_RFC;
                     lblCURP.Text = itemAlterar.sCli_CURP;
@@ -59,8 +71,7 @@ namespace AppElectronica.Formas
                     itemAlterar.lstCostos = RN.mTaller.EquipoCostoConsulta(itemAlterar.nIdTaller);
                     itemAlterar.lstPersonasRecoge = RN.mCliente.ConsultaEquiposPersonasRecojer(itemAlterar.nIdCliente);
                 }
-                dgvEquElec_Costos.AutoGenerateColumns = false;
-                dgvEquElec_Costos.DataSource = itemAlterar.lstCostos;
+                LlenaDataGridCostos();
                 dtgCli_AutRec.AutoGenerateColumns = false;
                 dtgCli_AutRec.DataSource = itemAlterar.lstPersonasRecoge;
             }
@@ -75,12 +86,29 @@ namespace AppElectronica.Formas
             finally { }
         }
 
+        private void LlenaDataGridCostos()
+        {
+            List<ent.entTallerCosto> listLlenar = null;
+            dgvEquElec_Costos.DataSource = null;
+            listLlenar = new List<ent.entTallerCosto>();
+            itemAlterar.lstCostos.ForEach(item =>
+            {
+                if (item.accionPantalla != ent.enumTextos.AccionPantalla.Elimina)
+                {
+                    listLlenar.Add(item);
+                }
+            });
+            dgvEquElec_Costos.AutoGenerateColumns = false;
+            dgvEquElec_Costos.DataSource = listLlenar;
+        }
+
         private void LlenaCatalogos()
         {
-            List<ent.entCatalogoSencillo> lstTipoEquipo = null, lstTCos_PorCobrar = null, lstTCos_Cobrados = null;
+            List<ent.entCatalogoSencillo> lstEstatus = null, lstTipoEquipo = null, lstTCos_PorCobrar = null, lstTCos_Cobrados = null;
             List<ent.entCatalogoSencillo> lstCB = null;
             try
             {
+                lstEstatus = RN.mCatalogos.consultaCatalogoEstadosEquipo();
                 lstTipoEquipo = RN.mCatalogos.consultaCatalogoTipoEquipo();
                 lstTCos_PorCobrar = RN.mCatalogos.consultaCatalogoPorCobrar();
                 lstTCos_Cobrados = RN.mCatalogos.consultaCatalogoCobrados();
@@ -105,6 +133,13 @@ namespace AppElectronica.Formas
                     lstCB.Add(new ent.entCatalogoSencillo(item.nID, item.sID, item.sAcronimo, item.sDescripcion, item.bEstado, string.Format("{0:00} :: {1}  - {2}", item.nID, item.sAcronimo, item.sDescripcion), item.nID));
                 });
                 LlenaCombos(cmbCos_TipoCosto, lstCB);
+
+                lstCB = new List<ent.entCatalogoSencillo>();
+                lstEstatus.ForEach(item =>
+                {
+                    lstCB.Add(new ent.entCatalogoSencillo(item.nID, item.sID, item.sAcronimo, item.sDescripcion, item.bEstado, string.Format("{0:00} :: {1}", item.nID, item.sDescripcion), item.nID));
+                });
+                LlenaCombos(cmbEstado, lstCB);
             }
             catch (ApplicationException ex)
             {
@@ -126,13 +161,30 @@ namespace AppElectronica.Formas
             cmb.SelectedIndex = 0;
         }
 
-        private void frmEquipoElectronico_Load(object sender, EventArgs e)
-        {
-            LlenaCatalogos();
-        }
+        private void frmEquipoElectronico_Load(object sender, EventArgs e) { }
 
         private void txtIDCliente_Leave(object sender, EventArgs e)
         {
+        }
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void cmbTipoEquipo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void txtMarca_Leave(object sender, EventArgs e)
+        {
+
+        }
+        private void txtNumSerie_Leave(object sender, EventArgs e)
+        {
+
+        }
+        private void txtObservaciones_Leave(object sender, EventArgs e)
+        {
+
         }
 
         private void btnBuscarCliente_Click(object sender, EventArgs e)
@@ -191,42 +243,6 @@ namespace AppElectronica.Formas
             }
         }
 
-        private void btnMonto_Click(object sender, EventArgs e)
-        {
-            ent.entCatalogoSencillo itemCB = null;
-            int nIdTabla = 0;
-            decimal dPorCobrar = 0, dCobrado = 0;
-            try
-            {
-                itemCB = (ent.entCatalogoSencillo)cmbCos_TipoCosto.SelectedItem;
-                nIdTabla = int.Parse(itemCB.sID);
-                switch (nIdTabla)
-                {
-                    case 3:
-                        dPorCobrar = decimal.Parse(txtCos_Monto.Text.Trim());
-                        break;
-                    case 4:
-                        dCobrado = decimal.Parse(txtCos_Monto.Text.Trim());
-                        break;
-                }
-
-                itemAlterar.lstCostos.Add(new ent.entTallerCosto(nIdTabla, itemCB.sAcronimo, itemCB.nID, itemCB.sDescripcion, itemAlterar.lstCostos.Count + 1, dPorCobrar, dCobrado, 0, txtCos_Observaciones.Text.Trim(), ent.enumTextos.AccionPantalla.Cambios));
-
-                dgvEquElec_Costos.DataSource = null;
-                dgvEquElec_Costos.AutoGenerateColumns = false;
-                dgvEquElec_Costos.DataSource = itemAlterar.lstCostos;
-            }
-            catch (ApplicationException ex)
-            {
-                MessageBox.Show(ex.Message, "Validacion de campos.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Error aplicativo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally { }
-        }
-
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             ent.entCatalogoSencillo itemC = null;
@@ -247,7 +263,7 @@ namespace AppElectronica.Formas
                 }
                 else if (accionPant == ent.enumTextos.AccionPantalla.Cambios)
                 {
-
+                    RN.mTaller.EquipoActualiza(itemAlterar);
                 }
             }
             catch (ApplicationException ex)
@@ -259,6 +275,65 @@ namespace AppElectronica.Formas
                 MessageBox.Show(ex.Message, "Error aplicativo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally { }
+        }
+
+        private void btnMonto_Click(object sender, EventArgs e)
+        {
+            ent.entCatalogoSencillo itemCB = null;
+            int nIdTabla = 0;
+            decimal dPorCobrar = 0, dCobrado = 0;
+            try
+            {
+                itemCB = (ent.entCatalogoSencillo)cmbCos_TipoCosto.SelectedItem;
+                nIdTabla = int.Parse(itemCB.sID);
+                switch (nIdTabla)
+                {
+                    case 3:
+                        dPorCobrar = decimal.Parse(txtCos_Monto.Text.Trim());
+                        break;
+                    case 4:
+                        dCobrado = decimal.Parse(txtCos_Monto.Text.Trim());
+                        break;
+                }
+
+                itemAlterar.lstCostos.Add(new ent.entTallerCosto(nIdTabla, itemCB.sAcronimo, itemCB.nID, itemCB.sDescripcion, -1, dPorCobrar, dCobrado, 0, txtCos_Observaciones.Text.Trim(), ent.enumTextos.AccionPantalla.Alta));
+
+                LlenaDataGridCostos();
+            }
+            catch (ApplicationException ex)
+            {
+                MessageBox.Show(ex.Message, "Validacion de campos.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error aplicativo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally { }
+        }
+        private void dgvEquElec_Costos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            ent.entTallerCosto itemTC = null;
+            int nId = 0, nIdTipoCosto = 0;
+            decimal mCobrado = 0, mPorCobrar = 0;
+            if (dgvEquElec_Costos.Columns[e.ColumnIndex].Name == "clRegEqui_ButtonBorrar")
+            {
+                itemTC = (Electronica_Entidades.entTallerCosto)dgvEquElec_Costos.Rows[e.RowIndex].DataBoundItem;
+
+                nId = itemTC.nIDCosto;
+                nIdTipoCosto = itemTC.nIdTipoCosto;
+                mCobrado = itemTC.mCobrado;
+                mPorCobrar = itemTC.mPorCobrar;
+            
+                itemAlterar.lstCostos.ForEach(item =>
+                {
+                    if (item.nIDCosto == nId && item.nIdTipoCosto == nIdTipoCosto && item.mCobrado == mCobrado && item.mPorCobrar == mPorCobrar)
+                    {
+                        item.accionPantalla = ent.enumTextos.AccionPantalla.Elimina;
+                    }
+                });
+
+                LlenaDataGridCostos();
+            }
         }
     }
 }
