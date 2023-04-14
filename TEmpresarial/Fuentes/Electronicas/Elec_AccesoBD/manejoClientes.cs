@@ -25,7 +25,7 @@ namespace Elec_AccesoBD
             }
         }
 
-        public List<ent.entCliente> ConsultaClientes(int? nIdCliente, string sApellido1, string sApellido2, string sNombre, string sRFC, string sCURP, Boolean? bolEstado)
+        public List<ent.entCliente> ConsultaClientes(int? nIdCliente, string sApellido1, string sApellido2, string sNombre, string sRFC, string sCURP, int? nEstado)
         {
             List<ent.entCliente> result = null;
             SqlDataReader sqlDR = null;
@@ -67,14 +67,14 @@ namespace Elec_AccesoBD
                     sQuery = string.Format("{0} Nombre LIKE '%' + @sNombre + '%' AND ", sQuery);
                     sqlCom.Parameters.Add(new SqlParameter("@sNombre", SqlDbType.NVarChar, 250)).Value = sNombre;
                 }
-                if (bolEstado != null)
+                if (nEstado != null)
                 {
                     sQuery = string.Format("{0} Estatus = @bEstado AND ", sQuery);
-                    sqlCom.Parameters.Add(new SqlParameter("@bEstado", SqlDbType.Bit)).Value = bolEstado;
+                    sqlCom.Parameters.Add(new SqlParameter("@bEstado", SqlDbType.Int)).Value = nEstado;
                 }
 
                 sQuery = sQuery.Substring(0, sQuery.Length - 5);
-                sQuery = string.Format("{0} ORDER BY Estatus DESC, Apellido1, Apellido2, Nombre", sQuery);
+                sQuery = string.Format("{0} ORDER BY Estatus, Apellido1, Apellido2, Nombre", sQuery);
 
                 sqlCom.CommandText = sQuery;
                 sqlCom.CommandType = CommandType.Text;
@@ -96,7 +96,7 @@ namespace Elec_AccesoBD
                     if (sqlDR["Correo"] != DBNull.Value) entCli.sCorreo = sqlDR.GetString(sqlDR.GetOrdinal("Correo"));
                     if (sqlDR["Direccion"] != DBNull.Value) entCli.sDireccion = sqlDR.GetString(sqlDR.GetOrdinal("Direccion"));
                     if (sqlDR["FechaBaja"] != DBNull.Value) entCli.fBaja = sqlDR.GetDateTime(sqlDR.GetOrdinal("FechaBaja"));
-                    if (sqlDR["Estatus"] != DBNull.Value) entCli.bEstdo = sqlDR.GetBoolean(sqlDR.GetOrdinal("Estatus"));
+                    if (sqlDR["Estatus"] != DBNull.Value) entCli.nEstado = sqlDR.GetInt32(sqlDR.GetOrdinal("Estatus"));
 
                     result.Add(entCli);
                 }
@@ -122,11 +122,11 @@ namespace Elec_AccesoBD
             }
             return result;
         }
-        public List<ent.entCliente> ConsultaEquiposPersonasRecojer(int nIdCliente)
+        public List<ent.entCliente> ConsultaEquiposPersonasRecoger(int nIdCliente)
         {
             List<ent.entCliente> result = null;
             SqlDataReader sqlDR = null;
-            string sQuery = "SELECT eR.IdCliente, eR.IdRecojer, eC.Apellido1, eC.Apellido2, eC.Nombre, eC.FechaAlta, eC.CURP, eC.RFC, eC.Telefono, eC.Correo, eC.Direccion, eC.FechaBaja, eC.Estatus FROM elecRecoger eR INNER JOIN elecCliente eC ON eR.IdRecojer = eC.IdCliente WHERE eR.IdCliente = @nIdCliente ORDER BY eR.IdCliente, eC.Estatus DESC, eC.Apellido1, eC.Apellido2, eC.Nombre";
+            string sQuery = "SELECT eR.IdCliente, eR.IdRecojer, eC.Apellido1, eC.Apellido2, eC.Nombre, eC.FechaAlta, eC.CURP, eC.RFC, eC.Telefono, eC.Correo, eC.Direccion, eC.FechaBaja, eC.Estatus FROM elecRecoger eR INNER JOIN elecCliente eC ON eR.IdRecojer = eC.IdCliente WHERE eR.IdCliente = @nIdCliente ORDER BY eC.Estatus, eR.IdCliente DESC, eC.Apellido1, eC.Apellido2, eC.Nombre";
             try
             {
                 result = new List<ent.entCliente>();
@@ -156,7 +156,7 @@ namespace Elec_AccesoBD
                     if (sqlDR["Correo"] != DBNull.Value) entCli.sCorreo = sqlDR.GetString(sqlDR.GetOrdinal("Correo"));
                     if (sqlDR["Direccion"] != DBNull.Value) entCli.sDireccion = sqlDR.GetString(sqlDR.GetOrdinal("Direccion"));
                     if (sqlDR["FechaBaja"] != DBNull.Value) entCli.fBaja = sqlDR.GetDateTime(sqlDR.GetOrdinal("FechaBaja"));
-                    if (sqlDR["Estatus"] != DBNull.Value) entCli.bEstdo = sqlDR.GetBoolean(sqlDR.GetOrdinal("Estatus"));
+                    if (sqlDR["Estatus"] != DBNull.Value) entCli.nEstado = sqlDR.GetInt32(sqlDR.GetOrdinal("Estatus"));
 
                     result.Add(entCli);
                 }
@@ -183,9 +183,10 @@ namespace Elec_AccesoBD
             return result;
         }
 
-        public void AltaCliente(string sApellido1, string sApellido2, string sNombre, string sCurp, string sRFC, string sTelefono, string sCorreo, string sDireccion, Boolean bolEstado)
+        public int AltaCliente(string sApellido1, string sApellido2, string sNombre, string sCurp, string sRFC, string sTelefono, string sCorreo, string sDireccion, int nEstado)
         {
-            string sQuery = "INSERT INTO elecCliente(Apellido1, Apellido2, Nombre, FechaAlta, CURP, RFC, Telefono, Correo, Direccion, Estatus) VALUES(@Apellido1, @Apellido2, @Nombre, GetDate(), @CURP, @RFC, @Telefono, @Correo, @Direccion, @Estatus)";
+            int nResult = 0;
+            string sQuery = "INSERT INTO elecCliente(Apellido1, Apellido2, Nombre, FechaAlta, CURP, RFC, Telefono, Correo, Direccion, Estatus) VALUES(@Apellido1, @Apellido2, @Nombre, GetDate(), @CURP, @RFC, @Telefono, @Correo, @Direccion, @Estatus) SELECT CAST(scope_identity() AS int) ";
             try
             {
                 if (sqlCon.State == ConnectionState.Closed) sqlCon.Open();
@@ -201,11 +202,11 @@ namespace Elec_AccesoBD
                 sqlCom.Parameters.Add(new SqlParameter("@Telefono", SqlDbType.NVarChar, 16)).Value = sTelefono;
                 sqlCom.Parameters.Add(new SqlParameter("@Correo", SqlDbType.NVarChar, 16)).Value = sCorreo;
                 sqlCom.Parameters.Add(new SqlParameter("@Direccion", SqlDbType.NVarChar, 16)).Value = sDireccion;
-                sqlCom.Parameters.Add(new SqlParameter("@Estatus", SqlDbType.Bit)).Value = bolEstado;
+                sqlCom.Parameters.Add(new SqlParameter("@Estatus", SqlDbType.Int)).Value = nEstado;
 
                 sqlCom.CommandType = CommandType.Text;
 
-                sqlCom.ExecuteNonQuery();
+                nResult = int.Parse(sqlCom.ExecuteScalar().ToString());
             }
             catch (ApplicationException ex)
             {
@@ -221,10 +222,11 @@ namespace Elec_AccesoBD
             {
                 Finaliza();
             }
+            return nResult;
         }
-        public void ActualizaCliente(int nIDCliente, string sApellido1, string sApellido2, string sNombre, string sCurp, string sRFC, string sTelefono, string sCorreo, string sDireccion, Boolean bolEstado)
+        public void ActualizaCliente(int nIDCliente, string sApellido1, string sApellido2, string sNombre, string sCurp, string sRFC, string sTelefono, string sCorreo, string sDireccion, int nEstado)
         {
-            string sQuery = "UPDATE elecCliente SET Apellido1=@Apellido1, Apellido2=@Apellido2, Nombre=@Nombre, CURP=@CURP, RFC=@RFC, Telefono=@Telefono, Correo=@Correo, Direccion=@Direccion, FechaBaja=CASE @Estado WHEN 1 THEN null ELSE GetDate() END, Estatus = @Estado WHERE IdCliente = @IdCliente";
+            string sQuery = "UPDATE elecCliente SET Apellido1=@Apellido1, Apellido2=@Apellido2, Nombre=@Nombre, CURP=@CURP, RFC=@RFC, Telefono=@Telefono, Correo=@Correo, Direccion=@Direccion, FechaBaja=CASE @Estado WHEN 3 THEN GetDate() ELSE null END, Estatus = @Estado WHERE IdCliente = @IdCliente";
             try
             {
                 if (sqlCon.State == ConnectionState.Closed) sqlCon.Open();
@@ -241,7 +243,72 @@ namespace Elec_AccesoBD
                 sqlCom.Parameters.Add(new SqlParameter("@Telefono", SqlDbType.NVarChar, 16)).Value = sTelefono;
                 sqlCom.Parameters.Add(new SqlParameter("@Correo", SqlDbType.NVarChar, 16)).Value = sCorreo;
                 sqlCom.Parameters.Add(new SqlParameter("@Direccion", SqlDbType.NVarChar, 16)).Value = sDireccion;
-                sqlCom.Parameters.Add(new SqlParameter("@Estado", SqlDbType.Bit)).Value = bolEstado;
+                sqlCom.Parameters.Add(new SqlParameter("@Estado", SqlDbType.Int)).Value = nEstado;
+
+                sqlCom.CommandType = CommandType.Text;
+
+                sqlCom.ExecuteNonQuery();
+            }
+            catch (ApplicationException ex)
+            {
+                mEx.Logs.MenejoLog.mensajeAlerta(ex.Message);
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                mEx.Logs.MenejoLog.mensajeError(ex.Message);
+                throw new ApplicationException("Error al actualizar.", ex);
+            }
+            finally
+            {
+                Finaliza();
+            }
+        }
+
+        public void AltaPersonaRecoge(int nIDCliente, int nIdPersonaRecoge)
+        {
+            string sQuery = "INSERT INTO elecRecoger(IdCliente, IdRecojer) VALUES(@nIdCleinte, @nIdRecoge)";
+            try
+            {
+                if (sqlCon.State == ConnectionState.Closed) sqlCon.Open();
+                sqlCom = sqlCon.CreateCommand();
+
+                sqlCom.CommandText = sQuery;
+
+                sqlCom.Parameters.Add(new SqlParameter("@nIdCleinte", SqlDbType.Int)).Value = nIDCliente;
+                sqlCom.Parameters.Add(new SqlParameter("@nIdRecoge", SqlDbType.Int)).Value = nIdPersonaRecoge;
+             
+                sqlCom.CommandType = CommandType.Text;
+
+                sqlCom.ExecuteNonQuery();
+            }
+            catch (ApplicationException ex)
+            {
+                mEx.Logs.MenejoLog.mensajeAlerta(ex.Message);
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                mEx.Logs.MenejoLog.mensajeError(ex.Message);
+                throw new ApplicationException("Error al actualizar.", ex);
+            }
+            finally
+            {
+                Finaliza();
+            }
+        }
+        public void EliminaPersonaRecoge(int nIDCliente, int nIdPersonaRecoge)
+        {
+            string sQuery = "DELETE FROM elecRecoger WHERE IdCliente = @nIdCleinte AND IdRecojer = @nIdRecoge";
+            try
+            {
+                if (sqlCon.State == ConnectionState.Closed) sqlCon.Open();
+                sqlCom = sqlCon.CreateCommand();
+
+                sqlCom.CommandText = sQuery;
+
+                sqlCom.Parameters.Add(new SqlParameter("@nIdCleinte", SqlDbType.Int)).Value = nIDCliente;
+                sqlCom.Parameters.Add(new SqlParameter("@nIdRecoge", SqlDbType.Int)).Value = nIdPersonaRecoge;
 
                 sqlCom.CommandType = CommandType.Text;
 

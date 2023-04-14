@@ -69,7 +69,7 @@ namespace AppElectronica.Formas
                     txtObservaciones.Text = itemAlterar.sObservaciones;
 
                     itemAlterar.lstCostos = RN.mTaller.EquipoCostoConsulta(itemAlterar.nIdTaller);
-                    itemAlterar.lstPersonasRecoge = RN.mCliente.ConsultaEquiposPersonasRecojer(itemAlterar.nIdCliente);
+                    itemAlterar.lstPersonasRecoge = RN.mCliente.ConsultaEquiposPersonasRecoger(itemAlterar.nIdCliente);
                 }
                 LlenaDataGridCostos();
                 dtgCli_AutRec.AutoGenerateColumns = false;
@@ -212,7 +212,7 @@ namespace AppElectronica.Formas
                     itemAlterar.sCli_CURP = pantCientesBusqueda.itemModificar.sCURP;
                     itemAlterar.sCli_Correo = pantCientesBusqueda.itemModificar.sCorreo;
                     itemAlterar.sCli_Telefono = pantCientesBusqueda.itemModificar.sTelefono;
-                    itemAlterar.lstPersonasRecoge = RN.mCliente.ConsultaEquiposPersonasRecojer(pantCientesBusqueda.itemModificar.nId);
+                    itemAlterar.lstPersonasRecoge = RN.mCliente.ConsultaEquiposPersonasRecoger(pantCientesBusqueda.itemModificar.nId);
                 }
 
                 dtgCli_AutRec.DataSource = null;

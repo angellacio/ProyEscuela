@@ -56,16 +56,16 @@ namespace AppElectronica.Formas
             get { return txtCliBus_CURP.Text.Trim(); }
             set { txtCliBus_CURP.Text = value.Trim(); }
         }
-        public Nullable<Boolean> bolEstado
+        public Nullable<int> nEstado
         {
             get
             {
-                Nullable<Boolean> bResult = null;
+                Nullable<int> nResult = null;
 
-                if (rdbActivo.Checked) bResult = true;
-                else if (rdbInactivo.Checked) bResult = false;
+                if (rdbActivo.Checked) nResult = 1;
+                else if (rdbInactivo.Checked) nResult = 3;
 
-                return bResult;
+                return nResult;
             }
             set
             {
@@ -73,9 +73,9 @@ namespace AppElectronica.Formas
                 rdbInactivo.Checked = false;
                 rdbActivo.Checked = false;
 
-                if (value == null) rdbTodos.Checked = true;
-                else if (value.Value == true) rdbActivo.Checked = true;
-                else if (value.Value == false) rdbInactivo.Checked = true;
+                if (value.Value == 1) rdbActivo.Checked = true;
+                else if (value.Value == 3) rdbInactivo.Checked = true;
+                else rdbTodos.Checked = true;
             }
         }
 
@@ -85,9 +85,10 @@ namespace AppElectronica.Formas
             try
             {
 
-                lstClientes = mRN.mCliente.ConsultaClientes(nIDCliente, sApellido1, sApellido2, sNombre, sRFC, sCURP, bolEstado);
+                lstClientes = mRN.mCliente.ConsultaClientes(nIDCliente, sApellido1, sApellido2, sNombre, sRFC, sCURP, nEstado);
 
                 dgvCli_Encontrados.AutoGenerateColumns = false;
+                dgvCli_Encontrados.DataSource = null;
                 dgvCli_Encontrados.DataSource = lstClientes;
             }
             catch (ApplicationException ex)
@@ -116,6 +117,7 @@ namespace AppElectronica.Formas
             if (e.ColumnIndex > -1 && e.RowIndex > -1)
             {
                 itemModificar = ((ent.entCliente)dgvCli_Encontrados.Rows[e.RowIndex].DataBoundItem);
+                itemModificar.lstAutorizados = mRN.mCliente.ConsultaEquiposPersonasRecoger(itemModificar.nId);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

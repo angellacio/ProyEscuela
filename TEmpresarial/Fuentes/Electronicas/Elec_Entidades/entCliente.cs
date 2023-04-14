@@ -37,6 +37,40 @@ namespace Electronica_Entidades
         public enumTextos.AccionPantalla apEstado { get; set; }
         public List<entCliente> lstAutorizados { get; set; }
 
+        public int nEstado {
+            get
+            {
+                int nResult = 3;
+                switch (apEstado)
+                {
+                    case enumTextos.AccionPantalla.Alta:
+                        nResult = 1;
+                        break;
+                    case enumTextos.AccionPantalla.Cambios:
+                        nResult = 2;
+                        break;
+                    default:
+                        nResult = 3;
+                        break;
+                }
+                return nResult;
+            }
+            set
+            {
+                switch (value)
+                {
+                    case 1:
+                        apEstado = enumTextos.AccionPantalla.Alta;
+                        break;
+                    case 2:
+                        apEstado = enumTextos.AccionPantalla.Cambios;
+                        break;
+                    default:
+                        apEstado = enumTextos.AccionPantalla.Elimina;
+                        break;
+                }
+            } 
+        }
         public string sNombreCompleto
         {
             get

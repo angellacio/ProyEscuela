@@ -393,21 +393,20 @@
             // 
             // Id
             // 
-            this.Id.DataPropertyName = "nId";
             this.Id.HeaderText = "ID";
             this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
             this.Id.Width = 43;
             // 
             // Nombre
             // 
-            this.Nombre.DataPropertyName = "sNombreCompleto";
             this.Nombre.HeaderText = "Nombre";
             this.Nombre.Name = "Nombre";
+            this.Nombre.ReadOnly = true;
             this.Nombre.Width = 69;
             // 
             // RFC
             // 
-            this.RFC.DataPropertyName = "sRFC";
             this.RFC.HeaderText = "RFC";
             this.RFC.Name = "RFC";
             this.RFC.ReadOnly = true;
