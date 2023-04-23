@@ -1,9 +1,6 @@
 package Evidencia2.Modelo;
 
-import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.management.InvalidApplicationException;
 
 public class manejoIMC {
 	public ArrayList<Evidencia2.Entidades.entIMC> consultaIMC(int nIdUsuario) {

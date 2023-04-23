@@ -1,8 +1,6 @@
 package Evidencia2.Entidades;
 
-import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 
 public class entUsuario {

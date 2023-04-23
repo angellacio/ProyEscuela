@@ -1,6 +1,5 @@
 package Evidencia2.Modelo;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.management.InvalidApplicationException;
